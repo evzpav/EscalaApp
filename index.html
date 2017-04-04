@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="escala">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Escala com Angular</title>
+
+    <!--bootstrap-->
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet" media="all">
+    <link href="theme-dashboard-extended/assets/css/toolkit-light.css" rel="stylesheet" media="all">
+    <link href="theme-dashboard-extended/assets/css/application.css" rel="stylesheet" media="all">
+
+
+    <link href="bower_components/alertifyjs/dist/css/alertify.css" rel="stylesheet" media="all">
+    <link href="theme-dashboard-extended/app.css" rel="stylesheet" media="all">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="theme-dashboard-extended/dist/toolkit.min.js"></script>
+
+    <!--angular-->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <!--<script src="bower_components/angular-locale_pt-br.js"></script>-->
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
+    <script src="bower_components/alertifyjs/dist/js/ngAlertify.js"></script>
+    <script src="bower_components/moment.js"></script>
+    <script src="bower_components/moment-with-locales.js"></script>
+    <!--<script src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>-->
+    <!--<script src="bower_components/jsPDF/dist/jspdf.debug.js"></script>-->
+    <!--<script src="bower_components/angular-save-html-to-pdf/dist/saveHtmlToPdf.js"></script>-->
+
+
+
+    <!--angular-implementation-->
+    <script src="js/app.js"></script>
+    <script src="js/value/configValue.js"></script>
+    <script src="js/service/timelineService.js"></script>
+    <script src="js/controller/timelineController.js"></script>
+    <script src="js/service/employeeService.js"></script>
+    <script src="js/controller/employeeController.js"></script>
+    <script src="js/controller/addEmployeeController.js"></script>
+    <script src="js/service/timePatternService.js"></script>
+    <script src="js/controller/timePatternController.js"></script>
+    <script src="js/controller/headerController.js"></script>
+    <script src="js/service/storeService.js"></script>
+    <!--<script src="js/controller/modalAddEmployee.js"></script>-->
+    <script src="js/config/uiRouterConfig.js"></script>
+    <script src="js/filter/change25Filter.js"></script>
+    <script src="js/filter/formatDateFilter.js"></script>
+    <script src="js/filter/dayOfWeekFilter.js"></script>
+    <script src="js/filter/nameFilter.js"></script>
+    <script src="js/value/emptyTimePattern.js"></script>
+
+
+    <!--<script src="js/value/jsonTeste.js"></script>-->
+    <script src="theme-dashboard-extended/dist/toolkit.min.js"></script>
+
+
+
+</head>
+
+<body id="printSectionId">
+
+<div class="container">
+    <div class="row">
+        <div ng-include="'view/navbar.html'"></div>
+
+        <div class="col-sm-12 content">
+
+            <ui-view></ui-view>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

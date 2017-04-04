@@ -1,0 +1,29 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand navbar-brand-emphasized" ui-sref="timeline">
+        <span class="icon icon-text navbar-brand-icon"></span>
+        EscalaApp
+    </a>
+</div>
+<div id="navbar" class="navbar-collapse collapse" ng-controller="headerController">
+    <ul class="nav navbar-nav">
+        <li ng-class="{'active': isActive('/timeline')}">
+            <a ui-sref="timeline">Gráficos</a>
+        </li>
+        <li ng-class="{'active': isActive('/employees')}">
+            <a ui-sref="employees">Funcionários</a>
+        </li>
+
+    </ul>
+    <!--<form class="form-inline navbar-form navbar-right">-->
+        <!--<div class="input-with-icon">-->
+            <!--<input class="form-control" type="text" placeholder="Search...">-->
+            <!--<span class="icon icon-magnifying-glass"></span>-->
+        <!--</div>-->
+    <!--</form>-->
+</div>

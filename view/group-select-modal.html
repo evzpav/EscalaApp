@@ -1,0 +1,70 @@
+<script type="text/ng-template" id="group-select-modal.html">
+    <!--<div class="modal-header">-->
+    <!--<h5 class="modal-title" id="modal-title">Editar horário isolado</h5>-->
+    <!--</div>-->
+    <form name="updatePeriodWorkModalForm">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div>
+                <h4 class="modal-title">Editar horário isolado</h4>
+
+                <div>
+                    <label id="employeeNameLabel">{{employee.employeeName | nameFilter}}</label>
+                </div>
+                <div>
+                    <label>{{day | formatDateFilter}}</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="modal-body" id="modal-body">
+
+            <label id="dayOfWeekLabel"></label>
+            <label id="dayLabel"></label>
+
+            <div class="checkbox custom-control custom-checkbox">
+                <label>
+                    <input id="workingCheckbox" type="checkbox" ng-model="working">
+                    <span class="custom-control-indicator"></span>
+                    Trabalhando?
+                </label>
+            </div>
+
+            <div class="flextable">
+                <div class="flextable-item">
+                    <p>Início:</p>
+                    <input ng-model="startTime" id="startTimeInput" type="text" class="form-control">
+                </div>
+
+                <div class="flextable-item">
+                    <p>Início Intervalo</p>
+                    <input ng-model="intervalStart" id="intervalStartInput" type="text" class="form-control">
+
+                </div>
+
+                <div class="flextable-item">
+                    <p>Fim Intervalo</p>
+
+                    <input ng-model="intervalEnd" id="intervalEndInput" type="text" class="form-control">
+
+                </div>
+                <div class="flextable-item">
+                    <p>Fim</p>
+
+                    <input ng-model="endTime" id="endTimeInput" type="text" class="form-control">
+
+                    <input id="workingTimeIdHidden" type="hidden" class="form-control">
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="updatePeriodOfWork()">Salvar</button>
+        <button class="btn btn-default" type="button" ng-click="cancelar()" data-dismiss="modal">Cancelar</button>
+    </div>
+</script>

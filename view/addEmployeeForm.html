@@ -1,0 +1,29 @@
+<div class="dashhead">
+    <div class="dashhead-titles">
+        <h6 class="dashhead-subtitle">{{subtitle}}</h6>
+        <h2 class="dashhead-title">{{title}}</h2>
+
+    </div>
+
+</div>
+
+    <div class="jumbotron">
+        <form name="employeeForm">
+            <h2>{{formTitle}}</h2>
+            <input class="form-control" type="text" ng-model="employee.employeeName" name="nome" placeholder="Nome do funcionário"
+                   ng-minlength="3" required/>
+            <input class="form-control" type="text" ng-model="employee.workFunction" placeholder="Função"
+                   ng-minlength="3" required/>
+
+
+            <button ng-click="addOrUpdateEmployee(employee)" type="button" ng-disabled="employeeForm.$invalid" class="btn btn-default form-control btn-danger">
+                {{buttonDescription}}
+            </button>
+            <button ng-click="cancel()" type="button" class="btn btn-default form-control btn-default">
+                Cancel
+            </button>
+        </form>
+
+    </div>
+
+  
