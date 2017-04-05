@@ -18,7 +18,6 @@ angular.module("escala").factory("storeService", function ($http, linkValues, $q
 
     }
 
-
     return {
         listStores: listStores,
         getStore: getStore

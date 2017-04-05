@@ -81,10 +81,6 @@ public class TimelineServlet extends HttpServlet {
 
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -128,9 +124,19 @@ public class TimelineServlet extends HttpServlet {
 
         Gson gsonReceived = JsonUtil.createGson(jsonUpdatePeriodOfWork, ConvertDate.dateTypeGson);
 
+        PeriodOfWork periodOfWork = convertDtoToPeriodOfWork(jsonUpdatePeriodOfWork, gsonReceived);
+
+        workingTimeController.updatePeriodOfWork(periodOfWork);
+
+        String message = "Horário atualizado com sucesso";
+
+        JsonUtil.sendJsonToJSP(response, message);
+    }
+
+    private PeriodOfWork convertDtoToPeriodOfWork(String jsonUpdatePeriodOfWork, Gson gsonReceived) {
         PeriodOfWorkStrDTO periodOfWorkStrDTO = gsonReceived.fromJson(jsonUpdatePeriodOfWork, PeriodOfWorkStrDTO.class);
 
-        LocalDate dayToUpdateLD = StringTimeToLocalDate(periodOfWorkStrDTO.getDay());
+        LocalDate dayToUpdateLD = ConvertDate.stringTimeToLocalDate(periodOfWorkStrDTO.getDay());
 
         LocalTime startTimeLT = StringTimeToLocalTime(periodOfWorkStrDTO.getStartTime());
         LocalDateTime startTime = LocalDateTime.of(dayToUpdateLD, startTimeLT);
@@ -148,17 +154,10 @@ public class TimelineServlet extends HttpServlet {
 
         PeriodOfWork periodOfWork = new PeriodOfWork(dayToUpdateLD, startTime, endTime, intervalStart, intervalEnd, working);
         periodOfWork.setWorkingTimeId(periodOfWorkStrDTO.getWorkingTimeId());
-
-        workingTimeController.updatePeriodOfWork(periodOfWork);
-
-        String message = "Horário atualizado com sucesso";
-
-        JsonUtil.sendJsonToJSP(response, message);
+        return periodOfWork;
     }
 
     private void showTimeline(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("/timeline.jsp");
         RequestDispatcher dispatcher = request.getRequestDispatcher("../index.html");
         dispatcher.forward(request, response);
     }
@@ -167,17 +166,20 @@ public class TimelineServlet extends HttpServlet {
             throws SQLException, IOException {
         String jsonlistTimelineSelectedDate = HttpUtil.getBody(request);
 
-        Gson gsonReceived = JsonUtil.createGson(jsonlistTimelineSelectedDate,ConvertDate.dateType);
+        Gson gsonReceived = JsonUtil.createGson(jsonlistTimelineSelectedDate, ConvertDate.dateType);
 
         SelectedDate selectedDateJson = gsonReceived.fromJson(jsonlistTimelineSelectedDate, SelectedDate.class);
 
         String selectedDate = selectedDateJson.getSelectedDate();
 
-        LocalDate selectedDateLD = StringDateToLocalDate(selectedDate);
-        List<WeekPeriodOfWork> listWeekPeriodOfWork = workingTimeController.getWorkingTimeDateSelected(selectedDateLD);
+        LocalDate selectedDateLD = ConvertDate.stringDateToLocalDate(selectedDate);
 
-        //TODO Nome da farmcia chumbado aqui
-        Store store = new Store("Farmácia DC Vitória", "Praça XV");
+        // TODO storeId chumbado aqui
+        int storeId = 1;
+        Store store = new Store();
+        store.setStoreId(storeId);
+
+        List<WeekPeriodOfWork> listWeekPeriodOfWork = workingTimeController.getWorkingTimeDateSelected(selectedDateLD, storeId);
 
         TimelineDTO timelineDTO = new TimelineDTO(listWeekPeriodOfWork, store);
 
@@ -220,29 +222,6 @@ public class TimelineServlet extends HttpServlet {
         return localTime;
     }
 
-    private LocalDate StringTimeToLocalDate(String stringDate) {
-        LocalDate localDate = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            localDate = LocalDate.parse(stringDate, formatter);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
-        return localDate;
-    }
-
-    private LocalDate StringDateToLocalDate(String stringDate) {
-        LocalDate localDate = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            localDate = LocalDate.parse(stringDate, formatter);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return localDate;
-    }
 
 }

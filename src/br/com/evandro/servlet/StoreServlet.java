@@ -81,10 +81,9 @@ public class StoreServlet extends HttpServlet {
     }
 
     private void listStores(HttpServletResponse response)  throws IOException, SQLException, ServletException {
-        List<Store> listOfStores = storeController.listStores(1);
-
+        int companyId = 1; // TODO chumbado aqui;
+        List<Store> listOfStores = storeController.listStores(companyId);
         ListOfStoresDTO listOfstoresDTO = new ListOfStoresDTO(listOfStores);
-
         JsonUtil.sendJsonToJSP(response, listOfstoresDTO);
 
     }

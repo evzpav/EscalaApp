@@ -2,9 +2,6 @@ angular.module("escala").controller("employeeController", function ($scope, empl
 
     $scope.subtitle = "LISTA";
     $scope.title = "Funcionários";
-    // $scope.store = {
-    //     storeName: "Farmácia DC Vitória"
-    // };
 
     $scope.store = '';
 
@@ -14,7 +11,8 @@ angular.module("escala").controller("employeeController", function ($scope, empl
                 $scope.store = data;
             })
     }
-    $scope.getStore(1);
+    var storeId = 1; //TODO storeId chumbado aqui, colocar nos state params
+    $scope.getStore(storeId);
 
     $scope.listEmployees = function () {
         employeeService.listEmployees()

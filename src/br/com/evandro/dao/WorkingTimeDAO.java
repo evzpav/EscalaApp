@@ -27,7 +27,7 @@ public class WorkingTimeDAO {
     }
 
 
-    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate) throws SQLException {
+    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate, int storeId) throws SQLException {
 
         List<WeekPeriodOfWork> listWeekPeriodOfWork = new ArrayList<>();
 
@@ -38,12 +38,13 @@ public class WorkingTimeDAO {
         try {
             myConn = dataSource.getConnection();
 
-            String sql = "select extract(dow from day) as day_of_week, extract(hour from start_time) as startTime, extract(hour from end_time) as endTime, " +
-                    " * from working_time join employee on  " +
-                    " employee.employee_id = working_time.employee_id where extract(year from day) = ? " +
-                    " and extract(week from day) = ?  " +
+            String sql = "select extract(dow from day) as day_of_week, extract(hour from start_time) as startTime, extract(hour from end_time) as endTime, * from working_time " +
+                    " join employee on  employee.employee_id = working_time.employee_id " +
+                    " join store on store.store_id = employee.store_id" +
+                    " where extract(year from day) = ? " +
+                    " and extract(week from day) = ?" +
+                    " and store.store_id = ?" +
                     " order by startTime, endTime";
-
 
             myStmt = myConn.prepareStatement(sql);
 
@@ -54,6 +55,7 @@ public class WorkingTimeDAO {
 
             myStmt.setInt(1, year);
             myStmt.setInt(2, weekOfYear);
+            myStmt.setInt(3, storeId);
 
 
             myRs = myStmt.executeQuery();
@@ -70,9 +72,7 @@ public class WorkingTimeDAO {
                 Integer employeeId = myRs.getInt("employee_id");
                 String workFunction = myRs.getString("work_function");
                 Boolean working = myRs.getBoolean("working");
-                Integer storeId = myRs.getInt("store_id");
                 Integer workingTimeId = myRs.getInt("working_time_id");
-
                 Store store = new Store();
                 store.setStoreId(storeId);
 
@@ -89,6 +89,7 @@ public class WorkingTimeDAO {
                 periodOfWork.setWorking(working);
                 periodOfWork.setWorkingTimeId(workingTimeId);
                 periodOfWork.setEmployee(employee);
+
 
                 if (dayOfWeek == 0) {
                     dayOfWeek = 7;

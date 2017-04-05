@@ -26,8 +26,8 @@ public class WorkingTimeController {
 
     }
 
-    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate) throws SQLException {
-        return workingTimeDAO.getWorkingTimeDateSelected(selectedDate);
+    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate, int storeId) throws SQLException {
+        return workingTimeDAO.getWorkingTimeDateSelected(selectedDate, storeId);
 
     }
 
