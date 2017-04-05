@@ -151,7 +151,7 @@ public class EmployeeDAO {
 
 			myStmt.setString(1, employee.getEmployeeName());
 			myStmt.setString(2, employee.getWorkFunction());
-			myStmt.setInt(3, employee.getStore().getStoreId());
+			//myStmt.setInt(3, employee.getStore().getStoreId());
 			myStmt.setInt(3, 1); // storeId chumbado
 			myStmt.execute();
 
