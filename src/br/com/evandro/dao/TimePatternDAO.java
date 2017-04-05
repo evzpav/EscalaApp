@@ -146,48 +146,4 @@ public class TimePatternDAO {
     }
 
 
-//    public void updatePeriodOfWorkPattern(TimePattern timePattern, int employeeId) {
-//        Connection myConn = null;
-//        PreparedStatement myStmt = null;
-//
-//                try {
-//            myConn = dataSource.getConnection();
-//
-//            String sql = "update time_pattern set day = ?, start_time = ?, end_time = ?, interval_start = ?, " +
-//                    "interval_end = ?, working = ?, repeat_frequency = ? where employee_id = ?";
-//
-//
-//            myStmt = myConn.prepareStatement(sql);
-//
-//
-//            Timestamp theDay = Timestamp.valueOf(LocalDateTime.of(timePattern.getDay(), LocalTime.NOON));
-//            Timestamp startTime = Timestamp.valueOf(timePattern.getStartTime());
-//            Timestamp endTime = Timestamp.valueOf(timePattern.getEndTime());
-//            Timestamp intervalStart = Timestamp.valueOf(timePattern.getIntervalStart());
-//
-//            Timestamp intervalEnd = Timestamp.valueOf(timePattern.getIntervalEnd());
-//
-//
-//            myStmt.setTimestamp(1, theDay);
-//            myStmt.setTimestamp(2, startTime);
-//            myStmt.setTimestamp(3, endTime);
-//            myStmt.setTimestamp(4, intervalStart);
-//            myStmt.setTimestamp(5, intervalEnd);
-//            myStmt.setBoolean(6, timePattern.isWorking());
-//
-//            myStmt.setInt(7, timePattern.getRepeatFrequency());
-//            myStmt.setInt(8, employeeId);
-//            myStmt.execute();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//
-//
-//        } finally {
-//            CloseConnection.close(myConn, myStmt, null);
-//        }
-//
-//    }
-
-
 }

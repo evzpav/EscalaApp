@@ -169,8 +169,8 @@ angular.module("escala").controller("timePatternController", function ($scope, t
             .then(function (data) {
                 alertify.success(data)
                 $state.go('employees');
-            }).catch(function () {
-            alertify.error("Não foi possível salvar os horários");
+            }).catch(function (data) {
+            alertify.error("Não foi possível salvar os horários: "+ data);
         })
 
     }

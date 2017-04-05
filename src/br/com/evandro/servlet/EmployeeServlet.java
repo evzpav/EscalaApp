@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.annotation.Resource;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,6 @@ import br.com.evandro.controller.EmployeeController;
 import br.com.evandro.controller.WorkingTimeController;
 import br.com.evandro.util.HttpUtil;
 import br.com.evandro.util.JsonUtil;
-import br.com.evandro.util.ValidationError;
 import com.google.gson.JsonSyntaxException;
 
 
@@ -69,7 +67,7 @@ public class EmployeeServlet extends HttpServlet {
             System.out.println("get command :" + theCommand);
 
             if (theCommand == null) {
-                theCommand = "SHOW_EMPLOYEE_JSP";
+                theCommand = "";
 
             }
             switch (theCommand) {
@@ -89,10 +87,6 @@ public class EmployeeServlet extends HttpServlet {
     }
 
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String theCommand = request.getParameter("command");
@@ -119,7 +113,7 @@ public class EmployeeServlet extends HttpServlet {
                 try {
                     addEmployee(request, response);
                 } catch (BusinessException e) {
-                    e.printStackTrace();
+                    JsonUtil.sendErrorJsonToAngular(response,e.getErrors());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -128,6 +122,8 @@ public class EmployeeServlet extends HttpServlet {
             case "ADD_EMPLOYEE_TIME_PATTERN":
                 try {
                     addEmployeeTimePattern(request, response);
+                } catch (BusinessException e) {
+                    JsonUtil.sendErrorJsonToAngular(response,e.getErrors());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -137,12 +133,16 @@ public class EmployeeServlet extends HttpServlet {
                     updateEmployee(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
+                } catch (BusinessException e) {
+                    JsonUtil.sendErrorJsonToAngular(response,e.getErrors());
                 }
                 break;
 
             case "UPDATE_EMPLOYEE_TIME_PATTERN":
                 try {
                     updateEmployeeTimePattern(request, response);
+                } catch (BusinessException e) {
+                    JsonUtil.sendErrorJsonToAngular(response,e.getErrors());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -174,76 +174,72 @@ public class EmployeeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        JsonUtil.sendJsonToJSP(response, employee);
+        JsonUtil.sendJsonToAngular(response, employee);
     }
 
-    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private void addEmployee(HttpServletRequest request, HttpServletResponse response) throws BusinessException, IOException {
         String jsonAddEmployee = HttpUtil.getBody(request);
 
         Gson gsonReceived = JsonUtil.createGson(jsonAddEmployee);
         EmployeeDTO employeeDTO = null;
-        try {
-            employeeDTO = gsonReceived.fromJson(jsonAddEmployee, EmployeeDTO.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        employeeDTO = gsonReceived.fromJson(jsonAddEmployee, EmployeeDTO.class);
+
         Employee employee = null;
         int employeeId = 0;
         try {
             employee = employeeController.convertEmployeeDtoTotoEmployee(employeeDTO);
+            Store store = new Store();
+            store.setStoreId(1); // TODO id chumbado aqui
+            employee.setStore(store);
             employeeId = employeeController.addEmployee(employee);
-        } catch (BusinessException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new BusinessException("Não foi possível adicionar o funcionário.");
         }
-        JsonUtil.sendJsonToJSP(response, employeeId);
+        JsonUtil.sendJsonToAngular(response, employeeId);
     }
 
-    private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    private void updateEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, BusinessException, SQLException {
         String jsonUpdateEmployee = HttpUtil.getBody(request);
 
         Gson gsonReceived = JsonUtil.createGson(jsonUpdateEmployee);
         EmployeeDTO employeeDTO = null;
-        try {
-            employeeDTO = gsonReceived.fromJson(jsonUpdateEmployee, EmployeeDTO.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        employeeDTO = gsonReceived.fromJson(jsonUpdateEmployee, EmployeeDTO.class);
+
         Employee employee = null;
 
         try {
             employee = employeeController.convertEmployeeDtoTotoEmployee(employeeDTO);
             employeeController.updateEmployee(employee);
         } catch (Exception e) {
-            e.printStackTrace();
+           throw new BusinessException(e.getMessage());
         }
         String msg = "Funcionário editado com sucesso";
-        JsonUtil.sendJsonToJSP(response, msg);
+        JsonUtil.sendJsonToAngular(response, msg);
     }
 
 
-    private void addEmployeeTimePattern(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    private void addEmployeeTimePattern(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, BusinessException {
         String jsonAddEmployeeTimePattern = HttpUtil.getBody(request);
         Gson gsonReceived = JsonUtil.createGson(jsonAddEmployeeTimePattern);
         TimePatternDTO timePatternDTO = null;
-        try {
-            timePatternDTO = gsonReceived.fromJson(jsonAddEmployeeTimePattern, TimePatternDTO.class);
 
-            List<WeekTimePattern> listOfWeekTimePattern = null;
-            listOfWeekTimePattern = employeeController.convertTimePatternDtoToTimePattern(timePatternDTO);
-            employeeController.addTimePatternToEmployee(listOfWeekTimePattern, timePatternDTO.getEmployeeId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        timePatternDTO = gsonReceived.fromJson(jsonAddEmployeeTimePattern, TimePatternDTO.class);
+
+        List<WeekTimePattern> listOfWeekTimePattern = null;
+        listOfWeekTimePattern = employeeController.convertTimePatternDtoToTimePattern(timePatternDTO);
+        employeeController.addTimePatternToEmployee(listOfWeekTimePattern, timePatternDTO.getEmployeeId());
+
         String mensagem = "Horários adicionados com sucesso";
-        JsonUtil.sendJsonToJSP(response, mensagem);
+        JsonUtil.sendJsonToAngular(response, mensagem);
 
     }
 
-    private void updateEmployeeTimePattern(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    private void updateEmployeeTimePattern(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, BusinessException {
         String jsonUpdateEmployeeTimePattern = HttpUtil.getBody(request);
         Gson gsonReceived = JsonUtil.createGson(jsonUpdateEmployeeTimePattern);
         TimePatternDTO timePatternDTO = null;
-        try {
+
             timePatternDTO = gsonReceived.fromJson(jsonUpdateEmployeeTimePattern, TimePatternDTO.class);
 
             List<WeekTimePattern> listOfWeekTimePattern = null;
@@ -251,10 +247,8 @@ public class EmployeeServlet extends HttpServlet {
             LocalDate referenceDate = workingTimeController.setStartWeekDate(timePatternDTO.getStartWeekDate());
             employeeController.updateTimePatternToEmployee(listOfWeekTimePattern, timePatternDTO.getEmployeeId(), referenceDate);
             String mensagem = "Horários atualizados com sucesso";
-            JsonUtil.sendJsonToJSP(response, mensagem);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            JsonUtil.sendJsonToAngular(response, mensagem);
+
     }
 
 
@@ -262,12 +256,11 @@ public class EmployeeServlet extends HttpServlet {
             throws IOException, SQLException, ServletException {
         List<Employee> listOfEmployees = employeeController.listEmployees();
 
-        // Nome da farmacia chumbado aqui - criar banco de dados depois
-      //  Store store = new Store("Farmácia DC Vitória", "Praça XV");
-        Store store = storeController.getStoreById(1); // storeId chumbado aqui
+        int storeId = 1;// TODO storeId chumbado aqui
+        Store store = storeController.getStoreById(storeId);
         ListOfEmployeesDTO listOfEmployeesDTO = new ListOfEmployeesDTO(listOfEmployees, store);
 
-        JsonUtil.sendJsonToJSP(response, listOfEmployeesDTO);
+        JsonUtil.sendJsonToAngular(response, listOfEmployeesDTO);
 
     }
 
@@ -287,7 +280,7 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         String message = "Funcionário excluido com sucesso";
-        JsonUtil.sendJsonToJSP(response, message);
+        JsonUtil.sendJsonToAngular(response, message);
     }
 
 

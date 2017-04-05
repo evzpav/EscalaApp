@@ -7,9 +7,6 @@ import javax.sql.DataSource;
 
 import java.util.List;
 
-/**
- * Created by Evandro on 02/03/2017.
- */
 public class TimePatternController {
 
     private TimePatternDAO timePatternDAO;

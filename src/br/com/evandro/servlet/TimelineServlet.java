@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -20,6 +19,7 @@ import javax.sql.DataSource;
 import br.com.evandro.DTO.PeriodOfWorkStrDTO;
 import br.com.evandro.DTO.TimelineDTO;
 import br.com.evandro.controller.WorkingTimeController;
+import br.com.evandro.exceptions.BusinessException;
 import br.com.evandro.model.*;
 import br.com.evandro.util.ConvertDate;
 import br.com.evandro.util.HttpUtil;
@@ -51,37 +51,7 @@ public class TimelineServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        try {
-            String theCommand = request.getParameter("command");
-
-            System.out.println("get command :" + theCommand);
-
-            if (theCommand == null) {
-                theCommand = "SHOW_TIMELINE_JSP";
-
-            }
-            switch (theCommand) {
-
-                case "SHOW_TIMELINE_JSP":
-
-                    showTimeline(request, response);
-                    break;
-
-                default:
-
-                    showTimeline(request, response);
-            }
-
-        } catch (Exception exc) {
-            throw new ServletException(exc);
-        }
-
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             String theCommand = request.getParameter("command");
@@ -90,10 +60,6 @@ public class TimelineServlet extends HttpServlet {
 
             switch (theCommand) {
 
-                case "SHOW_TIMELINE_JSP":
-
-                    showTimeline(request, response);
-                    break;
 
                 case "LIST_TIMELINE_WITH_SELECTED_DATE":
 
@@ -110,7 +76,7 @@ public class TimelineServlet extends HttpServlet {
                     break;
 
                 default:
-                    showTimeline(request, response);
+
             }
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -119,7 +85,7 @@ public class TimelineServlet extends HttpServlet {
 
     }
 
-    private void updatePeriodOfWork(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+    private void updatePeriodOfWork(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, BusinessException {
         String jsonUpdatePeriodOfWork = HttpUtil.getBody(request);
 
         Gson gsonReceived = JsonUtil.createGson(jsonUpdatePeriodOfWork, ConvertDate.dateTypeGson);
@@ -130,24 +96,24 @@ public class TimelineServlet extends HttpServlet {
 
         String message = "Horário atualizado com sucesso";
 
-        JsonUtil.sendJsonToJSP(response, message);
+        JsonUtil.sendJsonToAngular(response, message);
     }
 
-    private PeriodOfWork convertDtoToPeriodOfWork(String jsonUpdatePeriodOfWork, Gson gsonReceived) {
+    private PeriodOfWork convertDtoToPeriodOfWork(String jsonUpdatePeriodOfWork, Gson gsonReceived) throws BusinessException {
         PeriodOfWorkStrDTO periodOfWorkStrDTO = gsonReceived.fromJson(jsonUpdatePeriodOfWork, PeriodOfWorkStrDTO.class);
 
         LocalDate dayToUpdateLD = ConvertDate.stringTimeToLocalDate(periodOfWorkStrDTO.getDay());
 
-        LocalTime startTimeLT = StringTimeToLocalTime(periodOfWorkStrDTO.getStartTime());
+        LocalTime startTimeLT = ConvertDate.stringTimeToLocalTime(periodOfWorkStrDTO.getStartTime());
         LocalDateTime startTime = LocalDateTime.of(dayToUpdateLD, startTimeLT);
 
-        LocalTime endTimeLT = StringTimeToLocalTime(periodOfWorkStrDTO.getEndTime());
+        LocalTime endTimeLT = ConvertDate.stringTimeToLocalTime(periodOfWorkStrDTO.getEndTime());
         LocalDateTime endTime = LocalDateTime.of(dayToUpdateLD, endTimeLT);
 
-        LocalTime intervalStartLT = StringTimeToLocalTime(periodOfWorkStrDTO.getIntervalStart());
+        LocalTime intervalStartLT = ConvertDate.stringTimeToLocalTime(periodOfWorkStrDTO.getIntervalStart());
         LocalDateTime intervalStart = LocalDateTime.of(dayToUpdateLD, intervalStartLT);
 
-        LocalTime intervalEndLT = StringTimeToLocalTime(periodOfWorkStrDTO.getIntervalEnd());
+        LocalTime intervalEndLT = ConvertDate.stringTimeToLocalTime(periodOfWorkStrDTO.getIntervalEnd());
         LocalDateTime intervalEnd = LocalDateTime.of(dayToUpdateLD, intervalEndLT);
 
         boolean working = periodOfWorkStrDTO.getWorking();
@@ -183,7 +149,7 @@ public class TimelineServlet extends HttpServlet {
 
         TimelineDTO timelineDTO = new TimelineDTO(listWeekPeriodOfWork, store);
 
-        JsonUtil.sendJsonToJSP(response, timelineDTO);
+        JsonUtil.sendJsonToAngular(response, timelineDTO);
 
     }
 
@@ -199,28 +165,11 @@ public class TimelineServlet extends HttpServlet {
 
         PeriodOfWork periodOfWorkSelected = workingTimeController.getPeriodOfWorkById(periodOfWork.getWorkingTimeId());
 
-        JsonUtil.sendJsonToJSP(response, periodOfWorkSelected);
+        JsonUtil.sendJsonToAngular(response, periodOfWorkSelected);
 
     }
 
-    private LocalTime StringTimeToLocalTime(String stringTime) {
-        LocalTime localTime = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            localTime = LocalTime.parse(stringTime, formatter);
 
-        } catch (Exception e) {
-        }
-        if (localTime == null) {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-                localTime = LocalTime.parse(stringTime, formatter);
-
-            } catch (Exception e) {
-            }
-        }
-        return localTime;
-    }
 
 
 
