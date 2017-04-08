@@ -94,11 +94,22 @@
 }
 
 #filterInput {
-    margin-left: 0;
+    margin-left: 0px;
+}
+#filterInputDiv{
+    margin-left: 15px;
+    margin-bottom: 30px;
+
+
+}
+
+#storeNameDiv{
+    margin-left: 15px;
 }
 
 #datePickerTimeline {
     float: right;
+    margin-right:108px;
 }
 
 #storeLabel {
@@ -125,8 +136,24 @@
 }
 
 
-.table-responsive tr {
-    line-height: 50%;
+/*.table-responsive tr {*/
+    /*line-height: 50%;*/
+/*}*/
+
+
+.table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
+    padding: 1px;
 }
 
+.dayTitle{
+    color: #1CA8DD;
+    font-weight: normal;
 
+}
+
+.heatMapText{
+    text-align: center;
+}
+.hourHeader{
+    text-align: -webkit-right;
+}

@@ -123,11 +123,6 @@ public class TimelineServlet extends HttpServlet {
         return periodOfWork;
     }
 
-    private void showTimeline(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../index.html");
-        dispatcher.forward(request, response);
-    }
-
     private void listTimelineSelectedDate(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String jsonlistTimelineSelectedDate = HttpUtil.getBody(request);

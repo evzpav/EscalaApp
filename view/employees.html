@@ -32,7 +32,7 @@
     </div>
     <div class="table-full"></div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-condensed">
             <thead>
             <tr>
                 <th class="header">Id</th>
@@ -46,18 +46,18 @@
 
             <tbody>
             <tr ng-repeat="employee in employees | filter:searchText">
-                <td>{{employee.employeeId}}</td>
-                <td>{{employee.employeeName | nameFilter}}</td>
-                <td>{{employee.workFunction | nameFilter}}</td>
-                <td>
+                <td class="col-md-1">{{employee.employeeId}}</td>
+                <td class="col-md-1">{{employee.employeeName | nameFilter}}</td>
+                <td class="col-md-1">{{employee.workFunction | nameFilter}}</td>
+                <td class="col-md-1">
                     <button ng-click="goToTimePattern(employee)" class="btn btn-sm" type="button"><span
                             class="icon icon-clock" aria-hidden="true"></span></button>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <button ng-click="getEmployeeToUpdate(employee)" class="btn btn-sm" type="button"><span
                             class="icon icon-edit" aria-hidden="true"></span></button>
                 </td>
-                <td>
+                <td class="col-md-1">
                     <button ng-click="deleteEmployee(employee)" class="btn btn-sm" type="button"><span
                             class="icon icon-erase" aria-hidden="true"></span></button>
                 </td>

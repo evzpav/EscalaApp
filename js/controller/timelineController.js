@@ -220,7 +220,7 @@ angular.module("escala").controller("timelineController", function ($scope, $tim
 
 
 //MODAL
-    .controller("ModalGroupSelect", function ($scope, $uibModalInstance, periodOfWork, timePatternService, timelineService, alertify) {
+    .controller("ModalGroupSelect", function ($scope, $uibModalInstance, periodOfWork, timePatternService, timelineService, alertify, $state) {
 
         $scope.item = {};
         $scope.item.selectedGroups = [];
@@ -236,6 +236,12 @@ angular.module("escala").controller("timelineController", function ($scope, $tim
         $scope.cancelar = function () {
             $uibModalInstance.dismiss('cancel');
         };
+
+        $scope.goToTimePattern = function (employee) {
+            $state.go('timePattern', {employeeId: employee.employeeId});
+            $uibModalInstance.dismiss('cancel');
+        }
+
 
         $scope.updatePeriodOfWork = function () {
             $uibModalInstance.close($scope.item.selectedGroups);
