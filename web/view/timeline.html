@@ -25,7 +25,7 @@
     </div>
 
     <div id="datePickerTimeline"class="pull-right col-md-3">
-        <h4>Semana do dia: </h4>
+        <label>Semana do dia: </label>
         <p class="input-group">
             <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="datePicker"
                    is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
@@ -94,7 +94,7 @@
                 <div class="row"></div>
                 <div>
                     <label id="employeeNameLabel"><h2>{{employee.employeeName | nameFilter}}</h2></label>
-                    <button class="btn btn-sm" ng-click="goToTimePattern(employee)"><span
+                    <button id="buttonClockModal" class="btn btn-lg btn-primary-outline" ng-click="goToTimePattern(employee)"><span
                             class="icon icon-clock" aria-hidden="true"></span></button>
                 </div>
                 <div>
@@ -146,8 +146,8 @@
     </form>
 
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="updatePeriodOfWork()">Salvar</button>
-        <button class="btn btn-default" type="button" ng-click="cancelar()" data-dismiss="modal">Cancelar</button>
+        <button class="btn  btn-primary" type="button" ng-click="updatePeriodOfWork()">Salvar</button>
+        <button class="btn  btn-default" type="button" ng-click="cancelar()" data-dismiss="modal">Cancelar</button>
     </div>
 </script>
 

@@ -157,3 +157,13 @@
 .hourHeader{
     text-align: -webkit-right;
 }
+
+#repeatMondayButton{
+    margin-top: 36px;
+}
+
+#buttonClockModal{
+    margin-bottom: 10px;
+    margin-left: 5px;
+
+}

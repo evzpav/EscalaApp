@@ -54,8 +54,8 @@
     <div class="col-md-3">
         <!--<button ng-model="listOfWeekTimePattern" ng-hide="listOfWeekTimePattern" class="btn btn-pill btn-secondary">Adicionar horários</button>-->
     </div>
-    <div class="col-md-3">
-        <button ng-click="repeatFirstLine()" id="buttonrepeat" class="btn btn-borderless">Repetir horários da
+    <div id="repeatMondayButton" class="col-md-3">
+        <button ng-click="repeatFirstLine()" id="buttonrepeat" class="btn btn-default-outline">Repetir horários da
             Segunda-Feira
         </button>
     </div>
@@ -122,10 +122,10 @@
 
     <div class="pull-right">
 
-        <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary-outline">
+        <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary btn-group">
             <strong>Salvar</strong>
         </button>
 
-        <button ng-click="cancel()" type="button" class="btn btn-default">Cancelar</button>
+        <button ng-click="cancel()" type="button" class="btn btn-default btn-group">Cancelar</button>
     </div>
 </form>

@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-6">
-        <button type="button" ng-click="goToAddEmployeeForm()" class="btn btn-primary-outline"><span
+        <button type="button" ng-click="goToAddEmployeeForm()" class="btn btn-primary"><span
                 class="icon icon-add-user"></span> Adicionar Novo Funcionário
         </button>
     </div>
@@ -50,15 +50,15 @@
                 <td class="col-md-1">{{employee.employeeName | nameFilter}}</td>
                 <td class="col-md-1">{{employee.workFunction | nameFilter}}</td>
                 <td class="col-md-1">
-                    <button ng-click="goToTimePattern(employee)" class="btn btn-sm" type="button"><span
+                    <button ng-click="goToTimePattern(employee)" class="btn btn-sm btn-primary-outline" type="button"><span
                             class="icon icon-clock" aria-hidden="true"></span></button>
                 </td>
                 <td class="col-md-1">
-                    <button ng-click="getEmployeeToUpdate(employee)" class="btn btn-sm" type="button"><span
+                    <button ng-click="getEmployeeToUpdate(employee)" class="btn btn-sm btn-primary-outline" type="button"><span
                             class="icon icon-edit" aria-hidden="true"></span></button>
                 </td>
                 <td class="col-md-1">
-                    <button ng-click="deleteEmployee(employee)" class="btn btn-sm" type="button"><span
+                    <button ng-click="deleteEmployee(employee)" class="btn btn-sm btn-primary-outline" type="button"><span
                             class="icon icon-erase" aria-hidden="true"></span></button>
                 </td>
             </tr>
