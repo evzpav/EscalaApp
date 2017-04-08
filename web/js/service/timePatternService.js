@@ -17,7 +17,7 @@ angular.module("escala").factory("timePatternService", function ($http, linkValu
     }
 
     function formatLocalDateTimeToTime(dateFromJson) {
-        return parseLocalDateTime(dateFromJson).format('HH:mm')
+        return parseLocalDateTime(dateFromJson).format('HHmm')
     }
 
 
@@ -38,7 +38,7 @@ angular.module("escala").factory("timePatternService", function ($http, linkValu
             return $http.post(linkValues.UrlAddEmployeeTimePattern, obj)
                 .then(function (data) {
                     return data.data;
-                }).catch(function(data){
+                }).catch(function (data) {
                     return data.data
                 })
 
@@ -46,16 +46,24 @@ angular.module("escala").factory("timePatternService", function ($http, linkValu
             return $http.post(linkValues.UrlUpdateEmployeeTimePattern, obj)
                 .then(function (data) {
                     return data.data;
-                }).catch(function(data){
-                return data.data
-            })
+                }).catch(function (data) {
+                    return data.data
+                })
         }
+    }
+
+    function formatHourToSave(obj) {
+        var hourFirstHalf = obj.slice(0, 2);
+        var hourSecondHalf = obj.slice(2, 4);
+        return hourFirstHalf.concat(":", hourSecondHalf)
+
     }
 
     return {
         getTimePattern: getTimePattern,
         formatLocalDateTimeToTime: formatLocalDateTimeToTime,
         formatLocalDateToDate: formatLocalDateToDate,
-        saveOrUpdateTimePattern: saveOrUpdateTimePattern
+        saveOrUpdateTimePattern: saveOrUpdateTimePattern,
+        formatHourToSave: formatHourToSave
     }
 });

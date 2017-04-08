@@ -5,6 +5,9 @@ angular.module("escala").controller("timePatternController", function ($scope, t
     $scope.formTitle = "Cadastre o padrão de horários"
     $scope.timeRegex = '/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
 
+
+
+
     function init() {
 
         timePatternService.getTimePattern($stateParams.employeeId)
@@ -152,15 +155,21 @@ angular.module("escala").controller("timePatternController", function ($scope, t
     $scope.setStartWeekDate = function (date) {
         $scope.startWeekDate = date;
     }
-    $scope.saveOrUpdateTimePattern = function () {
-        var tp = [];
-        for (var i = 0; i < $scope.listOfWeekTimePattern.length; i++) {
-            tp.push($scope.listOfWeekTimePattern[i].timePattern);
 
+    $scope.saveOrUpdateTimePattern = function () {
+        var listTP = [];
+        for (var i = 0; i < $scope.listOfWeekTimePattern.length; i++) {
+            var tp = $scope.listOfWeekTimePattern[i].timePattern;
+            tp.startTime = timePatternService.formatHourToSave(tp.startTime);
+            tp.intervalStart = timePatternService.formatHourToSave(tp.intervalStart);
+            tp.intervalEnd = timePatternService.formatHourToSave(tp.intervalEnd);
+            tp.endTime = timePatternService.formatHourToSave(tp.endTime);
+
+            listTP.push(tp);
         }
 
         var timePatternDTOs = {
-            timePatternDTOs: tp,
+            timePatternDTOs: listTP,
             employeeId: $stateParams.employeeId,
             startWeekDate: $scope.startWeekDate
         }
@@ -178,5 +187,7 @@ angular.module("escala").controller("timePatternController", function ($scope, t
     $scope.cancel = function () {
         $state.go('employees');
     }
+
+
 
 });

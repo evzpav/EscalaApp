@@ -248,10 +248,10 @@ angular.module("escala").controller("timelineController", function ($scope, $tim
 
             jsonUpdatePeriodOfWork = {
                 day: timePatternService.formatLocalDateToDate(periodOfWork.day),
-                startTime: $scope.startTime,
-                endTime: $scope.endTime,
-                intervalStart: $scope.intervalStart,
-                intervalEnd: $scope.intervalEnd,
+                startTime: timePatternService.formatHourToSave($scope.startTime),
+                endTime: timePatternService.formatHourToSave($scope.endTime),
+                intervalStart: timePatternService.formatHourToSave($scope.intervalStart),
+                intervalEnd: timePatternService.formatHourToSave($scope.intervalEnd),
                 working: $scope.working,
                 workingTimeId: periodOfWork.workingTimeId
             };

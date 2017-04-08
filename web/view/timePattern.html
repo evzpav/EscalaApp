@@ -32,6 +32,7 @@
 
     </div>
 
+
     <div id="datePickerTimePattern" class="col-md-3">
 
         <label><p>Horários a partir da semana do dia:</p></label>
@@ -61,6 +62,8 @@
     </div>
 </div>
 
+
+
 <form name="timePatternForm">
     <div class="table-responsive">
         <table class="table  table-bordered">
@@ -82,13 +85,13 @@
                 <tr ng-repeat="item in listOfWeekTimePattern">
                     <td class="tdTimePattern">{{item.dayOfWeek | dayOfWeekFilter}}</td>
                     <td class="tdTimePattern"><input ng-model="item.timePattern.startTime" type="text"
-                                                     class="form-control inputTP" placeholder="00:00"/></td>
+                                                     class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"></td>
                     <td class="tdTimePattern"><input ng-model="item.timePattern.intervalStart"
-                                                     type="text" class="form-control inputTP" placeholder="00:00"/></td>
+                                                     type="text" class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
                     <td class="tdTimePattern"><input ng-model="item.timePattern.intervalEnd"
-                                                     type="text" class="form-control inputTP" placeholder="00:00"/></td>
+                                                     type="text" class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
                     <td class="tdTimePattern"><input ng-model="item.timePattern.endTime" type="text"
-                                                     class="form-control inputTP" placeholder="00:00"/></td>
+                                                     class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
                     <td class="tdTimePattern">
                         <div class="checkbox custom-control custom-checkbox">
                             <label> <input ng-model="item.timePattern.working" class="form-control inputTP"
@@ -122,7 +125,7 @@
 
     <div class="pull-right">
 
-        <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary btn-group">
+        <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary btn-group" ng-disabled="timePatternForm.$invalid">
             <strong>Salvar</strong>
         </button>
 
