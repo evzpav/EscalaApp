@@ -1,0 +1,9 @@
+* Create docs or documentation folder
+* Explain how to execute the application locally
+* Write the development requirements: npm, bower, apache tomcat, ...
+* Move BusinessException for a existent business package
+* Move NotFoundException for a existent or persistence package
+* Move dto package to persistence package
+* Move dao package to persistence package
+* Move CloseConnection to persistence package
+* Move controller package to view/web package 
