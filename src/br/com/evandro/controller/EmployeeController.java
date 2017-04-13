@@ -9,8 +9,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import br.com.evandro.DTO.*;
-import br.com.evandro.dao.EmployeeDAO;
+import br.com.evandro.persistence.DTO.*;
+import br.com.evandro.persistence.dao.EmployeeDAO;
 import br.com.evandro.exceptions.BusinessException;
 import br.com.evandro.model.*;
 import br.com.evandro.util.ConvertDate;

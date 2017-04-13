@@ -1,6 +1,6 @@
-package br.com.evandro.DTO;
+package br.com.evandro.persistence.DTO;
 
-public class TimePatternStrDTO {
+public class PeriodOfWorkStrDTO {
 
     private String day;
     private String startTime;
@@ -11,11 +11,10 @@ public class TimePatternStrDTO {
     private Integer workingTimeId;
     private Integer repeatFrequency;
 
-    public TimePatternStrDTO(){
+    public PeriodOfWorkStrDTO(){
 
     }
-
-    public TimePatternStrDTO(String day, String startTime, String endTime, String intervalStart, String intervalEnd, Boolean working, Integer repeatFrequency) {
+    public PeriodOfWorkStrDTO(String day, String startTime, String endTime, String intervalStart, String intervalEnd, Boolean working, Integer repeatFrequency) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.sql.DataSource;
 
-import br.com.evandro.dao.WorkingTimeDAO;
+import br.com.evandro.persistence.dao.WorkingTimeDAO;
 import br.com.evandro.model.NumberOfWeeks;
 import br.com.evandro.model.PeriodOfWork;
 import br.com.evandro.model.WeekPeriodOfWork;

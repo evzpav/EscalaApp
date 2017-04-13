@@ -1,6 +1,6 @@
 package br.com.evandro.controller;
 
-import br.com.evandro.dao.TimePatternDAO;
+import br.com.evandro.persistence.dao.TimePatternDAO;
 import br.com.evandro.model.WeekTimePattern;
 
 import javax.sql.DataSource;

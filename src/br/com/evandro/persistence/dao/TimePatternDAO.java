@@ -1,9 +1,9 @@
-package br.com.evandro.dao;
+package br.com.evandro.persistence.dao;
 
 
 import br.com.evandro.model.TimePattern;
 import br.com.evandro.model.WeekTimePattern;
-import br.com.evandro.util.CloseConnection;
+import br.com.evandro.persistence.CloseConnection;
 
 import javax.sql.DataSource;
 

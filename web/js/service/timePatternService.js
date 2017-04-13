@@ -52,18 +52,43 @@ angular.module("escala").factory("timePatternService", function ($http, linkValu
         }
     }
 
-    function formatHourToSave(obj) {
-        var hourFirstHalf = obj.slice(0, 2);
-        var hourSecondHalf = obj.slice(2, 4);
+    function formatHourToSave(time) {
+        var hourFirstHalf = time.slice(0, 2);
+        var hourSecondHalf = time.slice(2, 4);
         return hourFirstHalf.concat(":", hourSecondHalf)
-
     }
+
+    function isValidTimePattern(startTime, intervalStart, intervalEnd, endTime) {
+        var startTimeInt;
+        var intervalStartInt;
+        var intervalEndInt;
+        var endTimeInt;
+
+        startTimeInt = parseInt(startTime,10);
+        intervalStartInt = parseInt(intervalStart,10);
+        intervalEndInt = parseInt(intervalEnd,10);
+        endTimeInt = parseInt(endTime,10);
+        if (startTimeInt > 2359 || intervalStartInt > 2359 || intervalEndInt > 2359 || endTimeInt > 2359) {
+            return false;
+        } else if (startTimeInt < 600) {
+            return false;
+        } else if (endTimeInt > 100 && intervalEndInt > endTimeInt) {
+            return false;
+
+        } else if (startTimeInt > intervalStartInt || intervalStartInt > intervalEndInt) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     return {
         getTimePattern: getTimePattern,
         formatLocalDateTimeToTime: formatLocalDateTimeToTime,
         formatLocalDateToDate: formatLocalDateToDate,
         saveOrUpdateTimePattern: saveOrUpdateTimePattern,
-        formatHourToSave: formatHourToSave
+        formatHourToSave: formatHourToSave,
+        isValidTimePattern: isValidTimePattern
     }
 });

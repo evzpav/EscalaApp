@@ -1,8 +1,7 @@
-package br.com.evandro.dao;
+package br.com.evandro.persistence.dao;
 
 
 import java.sql.*;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -14,7 +13,7 @@ import javax.sql.DataSource;
 
 
 import br.com.evandro.model.*;
-import br.com.evandro.util.CloseConnection;
+import br.com.evandro.persistence.CloseConnection;
 
 
 public class WorkingTimeDAO {

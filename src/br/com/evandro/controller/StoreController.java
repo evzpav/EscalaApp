@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import br.com.evandro.dao.StoreDAO;
+import br.com.evandro.persistence.dao.StoreDAO;
 
 import br.com.evandro.model.*;
 

@@ -1,4 +1,4 @@
-package br.com.evandro.dao;
+package br.com.evandro.persistence.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import br.com.evandro.model.Store;
-import br.com.evandro.util.CloseConnection;
+import br.com.evandro.persistence.CloseConnection;
 
 public class StoreDAO {
 	private DataSource dataSource;

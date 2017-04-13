@@ -1,4 +1,4 @@
-package br.com.evandro.DTO;
+package br.com.evandro.persistence.DTO;
 
 import br.com.evandro.model.PeriodOfWork;
 import br.com.evandro.model.Store;

@@ -158,30 +158,39 @@ angular.module("escala").controller("timePatternController", function ($scope, t
 
     $scope.saveOrUpdateTimePattern = function () {
         var listTP = [];
+        var numberOfInvalidTP = 0;
         for (var i = 0; i < $scope.listOfWeekTimePattern.length; i++) {
             var tp = $scope.listOfWeekTimePattern[i].timePattern;
-            tp.startTime = timePatternService.formatHourToSave(tp.startTime);
-            tp.intervalStart = timePatternService.formatHourToSave(tp.intervalStart);
-            tp.intervalEnd = timePatternService.formatHourToSave(tp.intervalEnd);
-            tp.endTime = timePatternService.formatHourToSave(tp.endTime);
+            if(timePatternService.isValidTimePattern(tp.startTime, tp.intervalStart, tp.intervalEnd, tp.endTime)) {
+                var tpCopy = angular.copy($scope.listOfWeekTimePattern[i].timePattern);
+                tpCopy.startTime = timePatternService.formatHourToSave(tp.startTime);
+                tpCopy.intervalStart = timePatternService.formatHourToSave(tp.intervalStart);
+                tpCopy.intervalEnd = timePatternService.formatHourToSave(tp.intervalEnd);
+                tpCopy.endTime = timePatternService.formatHourToSave(tp.endTime);
+                listTP.push(tpCopy);
+            }else{
+                numberOfInvalidTP++;
 
-            listTP.push(tp);
+            }
         }
+        if(numberOfInvalidTP === 0) {
+            var timePatternDTOs = {
+                timePatternDTOs: listTP,
+                employeeId: $stateParams.employeeId,
+                startWeekDate: $scope.startWeekDate
+            }
 
-        var timePatternDTOs = {
-            timePatternDTOs: listTP,
-            employeeId: $stateParams.employeeId,
-            startWeekDate: $scope.startWeekDate
+            timePatternService.saveOrUpdateTimePattern(timePatternDTOs, $scope.isNewTimePattern)
+                .then(function (data) {
+                    alertify.success(data)
+                    $state.go('employees');
+                }).catch(function (data) {
+                alertify.error("Não foi possível salvar os horários: " + data);
+            })
+        }else{
+            alertify.error("Horário inválido");
+            delete $scope.listOfWeekTimePattern[i].timePattern;
         }
-
-        timePatternService.saveOrUpdateTimePattern(timePatternDTOs, $scope.isNewTimePattern)
-            .then(function (data) {
-                alertify.success(data)
-                $state.go('employees');
-            }).catch(function (data) {
-            alertify.error("Não foi possível salvar os horários: "+ data);
-        })
-
     }
 
     $scope.cancel = function () {

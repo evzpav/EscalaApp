@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
-import br.com.evandro.DTO.PeriodOfWorkStrDTO;
-import br.com.evandro.DTO.TimelineDTO;
+import br.com.evandro.persistence.DTO.PeriodOfWorkStrDTO;
+import br.com.evandro.persistence.DTO.TimelineDTO;
 import br.com.evandro.controller.WorkingTimeController;
 import br.com.evandro.exceptions.BusinessException;
 import br.com.evandro.model.*;

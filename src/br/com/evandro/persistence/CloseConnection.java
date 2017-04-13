@@ -1,4 +1,4 @@
-package br.com.evandro.util;
+package br.com.evandro.persistence;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

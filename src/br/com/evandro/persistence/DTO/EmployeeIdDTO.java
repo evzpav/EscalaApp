@@ -1,4 +1,4 @@
-package br.com.evandro.DTO;
+package br.com.evandro.persistence.DTO;
 
 public class EmployeeIdDTO {
 

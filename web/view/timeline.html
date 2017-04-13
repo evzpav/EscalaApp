@@ -69,7 +69,7 @@
             </tr>
 
             <tr>
-                <td>Funcionários</td>
+                <td>Funcionários/hora</td>
                 <td class="heatMapText" ng-repeat="heatMapLine in heatMapArray[key] track by $index" ng-class="fillColour(heatMapLine, heatMapArray[key])">
                     {{heatMapLine}}
                 </td>
@@ -89,7 +89,7 @@
         <div class="modal-header">
             <button ng-click="cancelar()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Editar horário isolado</h4>
+
             <div>
                 <div class="row"></div>
                 <div>
@@ -98,7 +98,7 @@
                             class="icon icon-clock" aria-hidden="true"></span></button>
                 </div>
                 <div>
-                    <label>{{day | formatDateFilter}}</label>
+                    <h4 class="modal-title">Editar horário isolado</h4>
                 </div>
 
             </div>
@@ -108,6 +108,7 @@
 
         <div class="modal-body" id="modal-body">
 
+            <label>{{day | formatDateFilter}}</label>
             <div class="checkbox custom-control custom-checkbox">
                 <label>
                     <input id="workingCheckbox" type="checkbox" ng-model="working">

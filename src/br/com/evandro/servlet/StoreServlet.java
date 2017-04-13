@@ -1,6 +1,6 @@
 package br.com.evandro.servlet;
 
-import br.com.evandro.DTO.*;
+import br.com.evandro.persistence.DTO.*;
 import br.com.evandro.controller.StoreController;
 import br.com.evandro.model.Store;
 import br.com.evandro.util.HttpUtil;

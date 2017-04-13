@@ -7,13 +7,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
             <div>
-                <h4 class="modal-title">Editar horário isolado</h4>
 
                 <div>
                     <label id="employeeNameLabel">{{employee.employeeName | nameFilter}}</label>
                 </div>
                 <div>
-                    <label>{{day | formatDateFilter}}</label>
+                    <h4 class="modal-title">Editar horário isolado</h4>
                 </div>
             </div>
 
@@ -21,10 +20,7 @@
 
 
         <div class="modal-body" id="modal-body">
-
-            <label id="dayOfWeekLabel"></label>
-            <label id="dayLabel"></label>
-
+            <label>{{day | formatDateFilter}}</label>
             <div class="checkbox custom-control custom-checkbox">
                 <label>
                     <input id="workingCheckbox" type="checkbox" ng-model="working">

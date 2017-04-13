@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import br.com.evandro.DTO.*;
+import br.com.evandro.persistence.DTO.*;
 import br.com.evandro.controller.StoreController;
 import br.com.evandro.controller.TimePatternController;
 import br.com.evandro.exceptions.BusinessException;

@@ -222,60 +222,64 @@ angular.module("escala").controller("timelineController", function ($scope, $tim
 //MODAL
     .controller("ModalGroupSelect", function ($scope, $uibModalInstance, periodOfWork, timePatternService, timelineService, alertify, $state) {
 
-        $scope.item = {};
-        $scope.item.selectedGroups = [];
+            $scope.item = {};
+            $scope.item.selectedGroups = [];
 
-        $scope.employee = periodOfWork.employee;
-        $scope.working = periodOfWork.working;
-        $scope.day = periodOfWork.day;
-        $scope.startTime = timePatternService.formatLocalDateTimeToTime(periodOfWork.startTime);
-        $scope.intervalStart = timePatternService.formatLocalDateTimeToTime(periodOfWork.intervalStart);
-        $scope.intervalEnd = timePatternService.formatLocalDateTimeToTime(periodOfWork.intervalEnd);
-        $scope.endTime = timePatternService.formatLocalDateTimeToTime(periodOfWork.endTime);
+            $scope.employee = periodOfWork.employee;
+            $scope.working = periodOfWork.working;
+            $scope.day = periodOfWork.day;
+            $scope.startTime = timePatternService.formatLocalDateTimeToTime(periodOfWork.startTime);
+            $scope.intervalStart = timePatternService.formatLocalDateTimeToTime(periodOfWork.intervalStart);
+            $scope.intervalEnd = timePatternService.formatLocalDateTimeToTime(periodOfWork.intervalEnd);
+            $scope.endTime = timePatternService.formatLocalDateTimeToTime(periodOfWork.endTime);
 
-        $scope.cancelar = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-
-        $scope.goToTimePattern = function (employee) {
-            $state.go('timePattern', {employeeId: employee.employeeId});
-            $uibModalInstance.dismiss('cancel');
-        }
-
-
-        $scope.updatePeriodOfWork = function () {
-            $uibModalInstance.close($scope.item.selectedGroups);
-
-            jsonUpdatePeriodOfWork = {
-                day: timePatternService.formatLocalDateToDate(periodOfWork.day),
-                startTime: timePatternService.formatHourToSave($scope.startTime),
-                endTime: timePatternService.formatHourToSave($scope.endTime),
-                intervalStart: timePatternService.formatHourToSave($scope.intervalStart),
-                intervalEnd: timePatternService.formatHourToSave($scope.intervalEnd),
-                working: $scope.working,
-                workingTimeId: periodOfWork.workingTimeId
+            $scope.cancelar = function () {
+                $uibModalInstance.dismiss('cancel');
             };
 
-            timelineService.updatePeriodOfWork(jsonUpdatePeriodOfWork)
-                .then(function (data) {
-                    alertify.success(data.data)
-                })
-                .catch(function (data) {
-                    alertify.error("error " + data)
-                });
-
-
-            $scope.formatTime = function (datetime) {
-                return timePatternService.formatLocalDateTimeToTime(datetime);
+            $scope.goToTimePattern = function (employee) {
+                $state.go('timePattern', {employeeId: employee.employeeId});
+                $uibModalInstance.dismiss('cancel');
             }
 
-            $scope.formatDay = function (day) {
-                return timePatternService.formatLocalDateToDate(day);
+
+            $scope.updatePeriodOfWork = function () {
+
+                if (timePatternService.isValidTimePattern($scope.startTime, $scope.intervalStart, $scope.intervalEnd, $scope.endTime)) {
+                    var jsonUpdatePeriodOfWork = {
+                        day: timePatternService.formatLocalDateToDate(periodOfWork.day),
+                        startTime: timePatternService.formatHourToSave($scope.startTime),
+                        endTime: timePatternService.formatHourToSave($scope.endTime),
+                        intervalStart: timePatternService.formatHourToSave($scope.intervalStart),
+                        intervalEnd: timePatternService.formatHourToSave($scope.intervalEnd),
+                        working: $scope.working,
+                        workingTimeId: periodOfWork.workingTimeId
+                    };
+
+                    timelineService.updatePeriodOfWork(jsonUpdatePeriodOfWork)
+                        .then(function (data) {
+                            $uibModalInstance.close($scope.item.selectedGroups);
+                            alertify.success(data.data)
+                        })
+                        .catch(function (data) {
+                            alertify.error("error " + data)
+                        });
+
+                } else {
+                    alertify.error('Horário inválido.');
+                }
+                $scope.formatTime = function (datetime) {
+                    return timePatternService.formatLocalDateTimeToTime(datetime);
+                }
+
+                $scope.formatDay = function (day) {
+                    return timePatternService.formatLocalDateToDate(day);
+                }
+
+
             }
 
         }
-
-
-    });
+    );
 
 
