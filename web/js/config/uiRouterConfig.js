@@ -4,9 +4,16 @@ angular.module("escala").config(function ($stateProvider,$locationProvider) {
     $locationProvider.hashPrefix('');
 
     $stateProvider
+        .state('/',{
+            name: 'login',
+            url:'/',
+            templateUrl: 'view/login.html',
+            controller: 'loginController'
+
+        })
         .state('index',{
             name: 'index',
-            url:'/',
+            url:'/index',
             templateUrl: 'view/timeline.html',
             controller: 'timelineController'
 

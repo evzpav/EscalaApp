@@ -1,6 +1,11 @@
-angular.module("escala").controller("timelineController", function ($scope, $timeout, timelineService, storeService, $uibModal, alertify) {
+angular.module("escala").controller("timelineController", function (loginService, $scope, $timeout, timelineService, storeService, $uibModal, alertify) {
+
+    $scope.email = loginService.retrieveEmail();
+    console.log("o email é :"+$scope.email);
+    
     $scope.subtitle = "GRÁFICOS";
     $scope.title = "Escala"
+
 
 
     $scope.timelineDTO = [];
