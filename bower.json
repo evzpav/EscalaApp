@@ -24,6 +24,10 @@
     "angular-ui-router": "^0.4.2",
     "alertify": "^0.3.10",
     "alertifyjs": "^1.0.11",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "ngstorage": "^0.3.11",
+    "moment": "^2.18.1",
+    "angular-bootstrap": "^2.5.0",
+    "roboto-fontface": "^0.7.0"
   }
 }

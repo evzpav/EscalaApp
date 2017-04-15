@@ -7,18 +7,18 @@
 
     <title>Escala App</title>
 
-    <!--bootstrap-->
+    <!--CSS-->
 
-    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet" media="all">
+    <!--<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet" media="all">-->
+    <link href="lib/roboto_fonts.css" rel="stylesheet" media="all">
     <link href="theme-dashboard-extended/assets/css/toolkit-light.css" rel="stylesheet" media="all">
     <link href="theme-dashboard-extended/assets/css/application.css" rel="stylesheet" media="all">
-
     <link href="bower_components/alertifyjs/dist/css/alertify.css" rel="stylesheet" media="all">
     <link href="theme-dashboard-extended/app.css" rel="stylesheet" media="all">
     <link rel="icon" href="theme-dashboard-extended/escala-icone.PNG">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
+    <!--jquery-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="theme-dashboard-extended/dist/toolkit.min.js"></script>
 
     <!--angular-->
@@ -27,11 +27,15 @@
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
-    <script src="bower_components/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!--<script src="lib/ui-bootstrap-tpls-2.5.0.min.js"></script>-->
     <script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
     <script src="bower_components/alertifyjs/dist/js/ngAlertify.js"></script>
-    <script src="bower_components/moment.js"></script>
-    <script src="bower_components/moment-with-locales.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
+    <!--<script src="lib/moment.js"></script>-->
+    <!--<script src="lib/moment-with-locales.js"></script>-->
     <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
 
     <!--<script src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>-->
@@ -50,6 +54,8 @@
     <script src="js/service/timePatternService.js"></script>
     <script src="js/controller/timePatternController.js"></script>
     <script src="js/controller/headerController.js"></script>
+    <script src="js/controller/loginController.js"></script>
+    <script src="js/service/loginService.js"></script>
     <script src="js/service/storeService.js"></script>
     <script src="js/config/uiRouterConfig.js"></script>
     <script src="js/filter/change25Filter.js"></script>
@@ -57,9 +63,7 @@
     <script src="js/filter/dayOfWeekFilter.js"></script>
     <script src="js/filter/nameFilter.js"></script>
     <script src="js/value/emptyTimePattern.js"></script>
-    <script src="theme-dashboard-extended/dist/toolkit.min.js"></script>
-
-
+    <script src="js/value/timePatternMask.js"></script>
 
 </head>
 
