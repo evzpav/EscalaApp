@@ -1,13 +1,16 @@
-angular.module("escala").service("loginService", function () {
+angular.module("escala").service("loginService", function ($localStorage) {
 
-    var email;
 
-    this.saveEmail = function(data){
-        email = data;
+    this.saveUser = function(data){
+        $localStorage.currentUser = data;
     };
 
-    this.retrieveEmail = function(){
-        return email;
+    this.retrieveUser = function(){
+        return $localStorage.currentUser;
+    };
+
+    this.logout = function(){
+        $localStorage.$reset()
     };
 
 });

@@ -1,4 +1,4 @@
-angular.module("escala").controller("loginController", function ($scope, $localStorage, $sessionStorage, loginService) {
+angular.module("escala").controller("loginController", function ($scope, $localStorage, $sessionStorage, loginService, $state) {
 
     $scope.subtitle = "ESCALA APP";
     $scope.title = "Acesso de usuário"
@@ -7,8 +7,8 @@ angular.module("escala").controller("loginController", function ($scope, $localS
 
 
     $scope.doLogin = function (login) {
-        loginService.saveEmail(login.email);
-
+        loginService.saveUser(login);
+        $state.go('timeline');
     }
 
 

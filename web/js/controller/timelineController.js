@@ -1,6 +1,6 @@
 angular.module("escala").controller("timelineController", function (loginService, $scope, $timeout, timelineService, storeService, $uibModal, alertify) {
 
-    $scope.email = loginService.retrieveEmail();
+    $scope.email = loginService.retrieveUser();
     console.log("o email é :"+$scope.email);
     
     $scope.subtitle = "GRÁFICOS";

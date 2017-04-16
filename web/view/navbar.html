@@ -10,14 +10,19 @@
         EscalaApp
     </a>
 </div>
-<div id="navbar" class="navbar-collapse collapse" ng-controller="headerController">
-    <ul class="nav navbar-nav">
+<div id="navbar" class="navbar-collapse collapse" ng-controller="headerController" >
+
+    <ul class="nav navbar-nav" ng-if="isLoggedIn()">
         <li ng-class="{'active': isActive('/timeline')}">
             <a ui-sref="timeline">Gráficos</a>
         </li>
         <li ng-class="{'active': isActive('/employees')}">
             <a ui-sref="employees">Funcionários</a>
         </li>
+        <li class="pull-right">
+            <a ng-click="logout()">Sair</a>
+        </li>
+
 
     </ul>
     <!--<form class="form-inline navbar-form navbar-right">-->
