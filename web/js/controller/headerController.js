@@ -1,4 +1,4 @@
-angular.module("escala").controller("headerController", function ($scope, $location, loginService, $state) {
+angular.module("escala").controller("headerController", function ($scope, $location, loginService, $state, alertify) {
 
 
     $scope.isActive = function (viewLocation) {
@@ -6,13 +6,27 @@ angular.module("escala").controller("headerController", function ($scope, $locat
     };
 
     $scope.isLoggedIn = function () {
-        console.log(loginService.retrieveUser())
         return loginService.retrieveUser();
     }
 
     $scope.logout = function () {
-        loginService.logout();
-        $state.go('login');
+        alertify
+            .okBtn("Sim")
+            .cancelBtn("Não")
+            .confirm("Deseja sair do sistema?", function (ev) {
+
+                loginService.doLogout();
+
+                $state.go('login');
+
+                ev.preventDefault();
+
+            }, function (ev) {
+                ev.preventDefault();
+
+            });
+
+
     }
 
 });

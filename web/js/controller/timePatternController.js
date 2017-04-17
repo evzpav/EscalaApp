@@ -6,8 +6,6 @@ angular.module("escala").controller("timePatternController", function ($scope, t
     $scope.timeRegex = '/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
 
 
-
-
     function init() {
 
         timePatternService.getTimePattern($stateParams.employeeId)
@@ -21,7 +19,7 @@ angular.module("escala").controller("timePatternController", function ($scope, t
                         $scope.listOfWeekTimePattern = [];
                         $scope.listOfWeekTimePattern = angular.copy(emptyTimePattern.listOfWeekTimePattern);
                         $scope.isNewTimePattern = true;
-                        alertify.delay(5000).log("Nenhum horário cadastrado para "+ data.employeeName);
+                        alertify.delay(5000).log("Nenhum horário cadastrado para " + data.employeeName);
 
 
                     } else {
@@ -161,19 +159,19 @@ angular.module("escala").controller("timePatternController", function ($scope, t
         var numberOfInvalidTP = 0;
         for (var i = 0; i < $scope.listOfWeekTimePattern.length; i++) {
             var tp = $scope.listOfWeekTimePattern[i].timePattern;
-            if(timePatternService.isValidTimePattern(tp.startTime, tp.intervalStart, tp.intervalEnd, tp.endTime)) {
+            if (timePatternService.isValidTimePattern(tp.startTime, tp.intervalStart, tp.intervalEnd, tp.endTime)) {
                 var tpCopy = angular.copy($scope.listOfWeekTimePattern[i].timePattern);
                 tpCopy.startTime = timePatternService.formatHourToSave(tp.startTime);
                 tpCopy.intervalStart = timePatternService.formatHourToSave(tp.intervalStart);
                 tpCopy.intervalEnd = timePatternService.formatHourToSave(tp.intervalEnd);
                 tpCopy.endTime = timePatternService.formatHourToSave(tp.endTime);
                 listTP.push(tpCopy);
-            }else{
+            } else {
                 numberOfInvalidTP++;
 
             }
         }
-        if(numberOfInvalidTP === 0) {
+        if (numberOfInvalidTP === 0) {
             var timePatternDTOs = {
                 timePatternDTOs: listTP,
                 employeeId: $stateParams.employeeId,
@@ -187,7 +185,7 @@ angular.module("escala").controller("timePatternController", function ($scope, t
                 }).catch(function (data) {
                 alertify.error("Não foi possível salvar os horários: " + data);
             })
-        }else{
+        } else {
             alertify.error("Horário inválido");
             delete $scope.listOfWeekTimePattern[i].timePattern;
         }
@@ -196,7 +194,6 @@ angular.module("escala").controller("timePatternController", function ($scope, t
     $scope.cancel = function () {
         $state.go('employees');
     }
-
 
 
 });

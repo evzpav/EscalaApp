@@ -11,10 +11,7 @@ angular.module("escala").factory("storeService", function ($http, linkValues, $q
     }
 
     function getStore(storeId) {
-        return $http.post(linkValues.UrlGetStore, {storeId: storeId})
-            .then(function (data) {
-                return data.data;
-            });
+        return $http.post(linkValues.UrlGetStore, {storeId: storeId});
 
     }
 

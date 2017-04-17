@@ -1,4 +1,4 @@
-angular.module("escala").controller("loginController", function ($scope, $localStorage, $sessionStorage, loginService, $state) {
+angular.module("escala").controller("loginController", function ($scope, $localStorage, $sessionStorage, loginService, $state, alertify) {
 
     $scope.subtitle = "ESCALA APP";
     $scope.title = "Acesso de usuário"
@@ -6,9 +6,22 @@ angular.module("escala").controller("loginController", function ($scope, $localS
     $scope.buttonDescription = "Entrar";
 
 
-    $scope.doLogin = function (login) {
-        loginService.saveUser(login);
-        $state.go('timeline');
+    $scope.doLogin = function (user) {
+        loginService.doLogin(user)
+            .then(function (data) {
+                loginService.saveUser(data);
+                alertify.success("Login sucesso!")
+                $state.go('timeline');
+            })
+            .catch(function (data) {
+                alertify.error(data.data.error);
+            })
+
+    }
+
+    $scope.cancel = function () {
+        delete $scope.user;
+        $scope.loginForm.$setPristine();
     }
 
 

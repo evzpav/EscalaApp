@@ -10,7 +10,8 @@ angular.module("escala").value('linkValues', {
     UrlAddEmployeeTimePattern: path()+"EmployeeServlet?command=ADD_EMPLOYEE_TIME_PATTERN",
     UrlUpdateEmployeeTimePattern: path()+"EmployeeServlet?command=UPDATE_EMPLOYEE_TIME_PATTERN",
     UrlGetStore: path()+"StoreServlet?command=GET_STORE",
-    UrlListStores: path()+"StoreServlet?command=LIST_STORES"
+    UrlListStores: path()+"StoreServlet?command=LIST_STORES",
+    UrlDoLogin: path()+"LoginServlet?command=LOGIN"
 });
 
 

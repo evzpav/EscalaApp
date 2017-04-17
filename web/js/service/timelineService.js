@@ -21,29 +21,23 @@ angular.module("escala").factory("timelineService", function ($http, linkValues,
 
     function isWorking(periodOfWork, hour) {
         function firstPeriodWorking(hour) {
-           return (hour >= periodOfWork.startTime.time.hour && hour < periodOfWork.intervalStart.time.hour)
+            return (hour >= periodOfWork.startTime.time.hour && hour < periodOfWork.intervalStart.time.hour)
         }
-        function secondPeriodWorking (hour){
+
+        function secondPeriodWorking(hour) {
             return (hour >= periodOfWork.intervalEnd.time.hour && hour < periodOfWork.endTime.time.hour)
         }
 
         if (periodOfWork.endTime.time.hour === 1) {
             return periodOfWork.working && (firstPeriodWorking(hour) ||
                 (hour >= periodOfWork.intervalEnd.time.hour && hour <= 25) )
-        }else if(periodOfWork.endTime.time.hour === 0){
+        } else if (periodOfWork.endTime.time.hour === 0) {
             return periodOfWork.working && (firstPeriodWorking(hour) ||
                 (hour >= periodOfWork.intervalEnd.time.hour && hour <= 24) )
         } else {
             return (periodOfWork.working && (firstPeriodWorking(hour)) || (periodOfWork.working && secondPeriodWorking(hour)))
         }
 
-        // if (periodOfWork.endTime.time.hour === 1) {
-        //     return periodOfWork.working && ((hour >= periodOfWork.startTime.time.hour && hour < periodOfWork.intervalStart.time.hour) ||
-        //         (hour >= periodOfWork.intervalEnd.time.hour && hour <= 25) )
-        // } else {
-        //     return periodOfWork.working && ((hour >= periodOfWork.startTime.time.hour && hour < periodOfWork.intervalStart.time.hour) &&
-        //         (hour >= periodOfWork.intervalEnd.time.hour && hour < periodOfWork.endTime.time.hour) )
-        // }
     };
 
 
@@ -75,7 +69,7 @@ angular.module("escala").factory("timelineService", function ($http, linkValues,
     }
 
     function updatePeriodOfWork(json) {
-       return $http.post(linkValues.UrlUpdatePeriodOfWork, json);
+        return $http.post(linkValues.UrlUpdatePeriodOfWork, json);
 
     }
 

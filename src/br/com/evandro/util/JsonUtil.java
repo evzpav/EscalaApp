@@ -33,6 +33,18 @@ public class JsonUtil {
 		response.getWriter().write(jsonToSend);
 		System.out.println("json sent to jsp: " + jsonToSend);
 	}
+
+	public static void sendNotFoundJsonToAngular(HttpServletResponse response, Object object) throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gsonToSend = gsonBuilder.setDateFormat(ConvertDate.dateTypeGson).create();
+		gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+		String jsonToSend = gsonToSend.toJson(object);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		HttpUtil.setStatusNotFound(response);
+		response.getWriter().write(jsonToSend);
+		System.out.println("json sent to jsp: " + jsonToSend);
+	}
 	
 
 	public static Gson createGson(String jsonReceived) {

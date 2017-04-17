@@ -10,13 +10,13 @@
 <div class="jumbotron">
     <form name="loginForm">
         <h2>{{formTitle}}</h2>
-        <input class="form-control" type="text" ng-model="login.email" placeholder="Email"
+        <input class="form-control" type="text" ng-model="user.email" placeholder="Email"
                ng-minlength="3" required/>
-        <input class="form-control" type="password" ng-model="login.password" placeholder="Senha"
+        <input class="form-control" type="password" ng-model="user.password" placeholder="Senha"
                ng-minlength="3" required/>
 
 
-        <button ng-click="doLogin(login)" type="button" ng-disabled="loginForm.$invalid" class="btn btn-default form-control btn-primary">
+        <button ng-click="doLogin(user)" type="button" ng-disabled="loginForm.$invalid" class="btn btn-default form-control btn-primary">
             {{buttonDescription}}
         </button>
         <button ng-click="cancel()" type="button" class="btn btn-default form-control btn-default">
