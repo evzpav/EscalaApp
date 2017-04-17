@@ -1,16 +1,16 @@
 angular.module("escala").value('linkValues', {
-    UrlListTimelineWithSelectedDate: path()+"TimelineServlet?command=LIST_TIMELINE_WITH_SELECTED_DATE",
-    UrlListEmployees: path()+"EmployeeServlet?command=LIST_EMPLOYEES",
-    UrlGetEmployee: path()+"EmployeeServlet?command=GET_EMPLOYEE",
-    UrlDeleteEmployee: path()+"EmployeeServlet?command=DELETE_EMPLOYEE",
-    UrlAddEmployee: path()+"EmployeeServlet?command=ADD_EMPLOYEE",
-    UrlUpdateEmployee: path()+"EmployeeServlet?command=UPDATE_EMPLOYEE",
-    UrlGetPeriodOfWorkById: path()+"TimelineServlet?command=GET_PERIOD_OF_WORK_BY_ID",
-    UrlUpdatePeriodOfWork: path()+"TimelineServlet?command=UPDATE_PERIOD_OF_WORK",
-    UrlAddEmployeeTimePattern: path()+"EmployeeServlet?command=ADD_EMPLOYEE_TIME_PATTERN",
-    UrlUpdateEmployeeTimePattern: path()+"EmployeeServlet?command=UPDATE_EMPLOYEE_TIME_PATTERN",
-    UrlGetStore: path()+"StoreServlet?command=GET_STORE",
-    UrlListStores: path()+"StoreServlet?command=LIST_STORES",
+    UrlListTimelineWithSelectedDate: path()+"api/TimelineServlet?command=LIST_TIMELINE_WITH_SELECTED_DATE",
+    UrlListEmployees: path()+"api/EmployeeServlet?command=LIST_EMPLOYEES",
+    UrlGetEmployee: path()+"api/EmployeeServlet?command=GET_EMPLOYEE",
+    UrlDeleteEmployee: path()+"api/EmployeeServlet?command=DELETE_EMPLOYEE",
+    UrlAddEmployee: path()+"api/EmployeeServlet?command=ADD_EMPLOYEE",
+    UrlUpdateEmployee: path()+"api/EmployeeServlet?command=UPDATE_EMPLOYEE",
+    UrlGetPeriodOfWorkById: path()+"api/TimelineServlet?command=GET_PERIOD_OF_WORK_BY_ID",
+    UrlUpdatePeriodOfWork: path()+"api/TimelineServlet?command=UPDATE_PERIOD_OF_WORK",
+    UrlAddEmployeeTimePattern: path()+"api/EmployeeServlet?command=ADD_EMPLOYEE_TIME_PATTERN",
+    UrlUpdateEmployeeTimePattern: path()+"api/EmployeeServlet?command=UPDATE_EMPLOYEE_TIME_PATTERN",
+    UrlGetStore: path()+"api/StoreServlet?command=GET_STORE",
+    UrlListStores: path()+"api/StoreServlet?command=LIST_STORES",
     UrlDoLogin: path()+"LoginServlet?command=LOGIN"
 });
 

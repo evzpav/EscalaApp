@@ -1,4 +1,4 @@
-angular.module("escala").config(function ($stateProvider,$locationProvider) {
+angular.module("escala").config(function ($stateProvider,$locationProvider, $urlRouterProvider) {
 
 
     $locationProvider.hashPrefix('');
@@ -6,20 +6,13 @@ angular.module("escala").config(function ($stateProvider,$locationProvider) {
     $stateProvider
         .state('login',{
             name: 'login',
-            url:'/',
+            url:'/login',
             templateUrl: 'view/login.html',
             controller: 'loginController',
             public: true
 
         })
-        .state('index',{
-            name: 'index',
-            url:'/index',
-            templateUrl: 'view/timeline.html',
-            controller: 'timelineController',
-            public: false
 
-        })
         .state('timeline',{
             name: 'timeline',
             url:'/timeline',
@@ -59,6 +52,8 @@ angular.module("escala").config(function ($stateProvider,$locationProvider) {
             public: false
 
         })
+
+        $urlRouterProvider.otherwise('/timeline')
 
 
 });

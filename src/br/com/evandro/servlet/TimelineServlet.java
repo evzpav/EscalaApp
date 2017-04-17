@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +28,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class Timeline
  */
-@WebServlet("/TimelineServlet")
+@WebServlet("/api/TimelineServlet")
 public class TimelineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -55,7 +54,6 @@ public class TimelineServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String theCommand = request.getParameter("command");
-
             System.out.println("post command :" + theCommand);
 
             switch (theCommand) {
@@ -125,6 +123,9 @@ public class TimelineServlet extends HttpServlet {
 
     private void listTimelineSelectedDate(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+
+        User user = (User) request.getAttribute("user");// TODO
+
         String jsonlistTimelineSelectedDate = HttpUtil.getBody(request);
 
         Gson gsonReceived = JsonUtil.createGson(jsonlistTimelineSelectedDate, ConvertDate.dateType);

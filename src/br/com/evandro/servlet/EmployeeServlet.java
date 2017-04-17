@@ -31,7 +31,7 @@ import com.google.gson.JsonSyntaxException;
 /**
  * Servlet implementation class Timeline
  */
-@WebServlet("/EmployeeServlet")
+@WebServlet("/api/EmployeeServlet")
 public class EmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

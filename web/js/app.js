@@ -9,13 +9,19 @@ angular.module("escala",
         'ngStorage'])
 
 
-    .run(['$state', '$rootScope', 'loginService', function ($state, $rootScope, loginService) {
-        $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+    .run(['$state', '$rootScope', 'loginService', '$http', function ($state, $rootScope, loginService, $http) {
 
-            if (!toState.public && !loginService.retrieveUser()) {
+        $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+            var user = loginService.retrieveUser();
+            if (!toState.public && !user) {
                 e.preventDefault();
                 $state.go('login');
+            } else if (user != null) {
+                $http.defaults.headers.common.Authorization = user.data.email + ":" + user.data.password;
+            } else {
+                $http.defaults.headers.common.Authorization = "";
             }
+        })
 
-        });
-    }])
+
+    }]);
