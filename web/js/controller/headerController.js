@@ -29,6 +29,17 @@ angular.module("escala").controller("headerController", function ($scope, $locat
 
     }
 
+    $scope.listStores = function () {
+        $scope.stores = loginService.listUserStores();
+    }
+
+    $scope.listStores();
+
+    $scope.setStore = function (store) {
+        loginService.saveDefaultStore(store.storeId);
+        $state.go($state.current.name, {}, {reload: true});
+    }
+
 });
 
 

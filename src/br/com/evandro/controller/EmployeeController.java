@@ -28,8 +28,8 @@ public class EmployeeController {
         timePatternController = new TimePatternController(dataSource);
     }
 
-    public List<Employee> listEmployees() throws SQLException {
-        return employeeDAO.listEmployeesActiveOnly();
+    public List<Employee> listEmployees(int storeId) throws SQLException {
+        return employeeDAO.listActiveEmployeesByStore(storeId);
 
     }
 
@@ -74,8 +74,6 @@ public class EmployeeController {
         List<PeriodOfWork> bigListOfPeriodOfWork = workingTimeController.generateListOfRepeatedPeriodsOfWorkUpdated(listOfWeekTimePattern);
         workingTimeController.addBigListOfPeriodOfWork(bigListOfPeriodOfWork, employeeId);
     }
-
-
 
 
     public void updateTimePatternToEmployee(List<WeekTimePattern> listOfWeekTimePattern, int employeeId, LocalDate referenceDate) {

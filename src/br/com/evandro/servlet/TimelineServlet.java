@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
+import br.com.evandro.controller.StoreController;
 import br.com.evandro.persistence.DTO.PeriodOfWorkStrDTO;
 import br.com.evandro.persistence.DTO.TimelineDTO;
 import br.com.evandro.controller.WorkingTimeController;
@@ -25,14 +26,13 @@ import br.com.evandro.util.HttpUtil;
 import br.com.evandro.util.JsonUtil;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class Timeline
- */
+
 @WebServlet("/api/TimelineServlet")
 public class TimelineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private WorkingTimeController workingTimeController;
+    private StoreController storeController;
 
     @Resource(name = "jdbc/escala")
     private DataSource dataSource;
@@ -44,6 +44,7 @@ public class TimelineServlet extends HttpServlet {
         try {
 
             workingTimeController = new WorkingTimeController(dataSource);
+            storeController = new StoreController(dataSource);
 
         } catch (Exception exc) {
             throw new ServletException(exc);
@@ -124,7 +125,8 @@ public class TimelineServlet extends HttpServlet {
     private void listTimelineSelectedDate(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
 
-        User user = (User) request.getAttribute("user");// TODO
+        Store store = (Store) request.getAttribute("store");
+        int storeId = store.getStoreId();
 
         String jsonlistTimelineSelectedDate = HttpUtil.getBody(request);
 
@@ -135,11 +137,6 @@ public class TimelineServlet extends HttpServlet {
         String selectedDate = selectedDateJson.getSelectedDate();
 
         LocalDate selectedDateLD = ConvertDate.stringDateToLocalDate(selectedDate);
-
-        // TODO storeId chumbado aqui
-        int storeId = 1;
-        Store store = new Store();
-        store.setStoreId(storeId);
 
         List<WeekPeriodOfWork> listWeekPeriodOfWork = workingTimeController.getWorkingTimeDateSelected(selectedDateLD, storeId);
 
@@ -164,6 +161,7 @@ public class TimelineServlet extends HttpServlet {
         JsonUtil.sendJsonToAngular(response, periodOfWorkSelected);
 
     }
+
 
 
 

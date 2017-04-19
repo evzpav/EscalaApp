@@ -28,9 +28,6 @@ import br.com.evandro.util.JsonUtil;
 import com.google.gson.JsonSyntaxException;
 
 
-/**
- * Servlet implementation class Timeline
- */
 @WebServlet("/api/EmployeeServlet")
 public class EmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -74,7 +71,7 @@ public class EmployeeServlet extends HttpServlet {
 
                 case "LIST_EMPLOYEES":
 
-                    listEmployees(response);
+                    listEmployees(request, response);
                     break;
 
                 default:
@@ -95,14 +92,6 @@ public class EmployeeServlet extends HttpServlet {
 
         switch (theCommand) {
 
-            case "LIST_EMPLOYEES":
-
-                try {
-                    listEmployees(response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
 
             case "GET_EMPLOYEE":
                 getEmployeeById(request, response);
@@ -182,15 +171,13 @@ public class EmployeeServlet extends HttpServlet {
 
         Gson gsonReceived = JsonUtil.createGson(jsonAddEmployee);
         EmployeeDTO employeeDTO = null;
-
         employeeDTO = gsonReceived.fromJson(jsonAddEmployee, EmployeeDTO.class);
 
         Employee employee = null;
         int employeeId = 0;
         try {
             employee = employeeController.convertEmployeeDtoTotoEmployee(employeeDTO);
-            Store store = new Store();
-            store.setStoreId(1); // TODO id chumbado aqui
+            Store store = getStore(request);
             employee.setStore(store);
             employeeId = employeeController.addEmployee(employee);
         } catch (Exception e) {
@@ -252,16 +239,18 @@ public class EmployeeServlet extends HttpServlet {
     }
 
 
-    private void listEmployees(HttpServletResponse response)
+    private void listEmployees(HttpServletRequest request, HttpServletResponse response)
             throws IOException, SQLException, ServletException {
-        List<Employee> listOfEmployees = employeeController.listEmployees();
 
-        int storeId = 1;// TODO storeId chumbado aqui
-        Store store = storeController.getStoreById(storeId);
+        Store store = getStore(request);
+        List<Employee> listOfEmployees = employeeController.listEmployees(store.getStoreId());
         ListOfEmployeesDTO listOfEmployeesDTO = new ListOfEmployeesDTO(listOfEmployees, store);
-
         JsonUtil.sendJsonToAngular(response, listOfEmployeesDTO);
 
+    }
+
+    private Store getStore(HttpServletRequest request) {
+        return (Store) request.getAttribute("store");
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {

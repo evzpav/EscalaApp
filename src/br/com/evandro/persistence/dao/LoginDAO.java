@@ -42,11 +42,13 @@ public class LoginDAO {
                 int companyId = myRs.getInt("company_id");
                 String companyName = myRs.getString("company_name");
                 int accessId = myRs.getInt("access_id");
+                int userId = myRs.getInt("user_id");
                 Company company = new Company();
                 company.setCompanyId(companyId);
                 company.setCompanyName(companyName);
                 user.setCompany(company);
                 user.setAccessId(accessId);
+                user.setUserId(userId);
 
             } else {
 
@@ -61,4 +63,6 @@ public class LoginDAO {
         return user;
 
     }
+
+
 }

@@ -1,23 +1,15 @@
-angular.module("escala").controller("employeeController", function ($scope, employeeService, $state, alertify, storeService) {
+angular.module("escala").controller("employeeController", function ($scope, employeeService, $state, alertify) {
 
     $scope.subtitle = "LISTA";
     $scope.title = "Funcionários";
 
     $scope.store = '';
 
-    $scope.getStore = function(storeId){
-        storeService.getStore(storeId)
-            .then(function (data) {
-                $scope.store = data;
-            })
-    }
-    var storeId = 1; //TODO storeId chumbado aqui, colocar nos state params
-    $scope.getStore(storeId);
-
     $scope.listEmployees = function () {
         employeeService.listEmployees()
             .then(function (data) {
                 $scope.employees = data.listOfEmployees;
+                $scope.store = data.store;
             })
     };
 
@@ -35,7 +27,7 @@ angular.module("escala").controller("employeeController", function ($scope, empl
         alertify
             .okBtn("Sim")
             .cancelBtn("Cancelar")
-            .confirm("Deletar "+employee.employeeName+" ?", function (ev) {
+            .confirm("Deletar " + employee.employeeName + " ?", function (ev) {
 
                 employeeService.deleteEmployee(employee)
                     .then(function (data) {
@@ -48,33 +40,10 @@ angular.module("escala").controller("employeeController", function ($scope, empl
                     })
                 ev.preventDefault();
 
-
-            }, function(ev) {
-
-                // The click event is in the
-                // event variable, so you can use
-                // it here.
+            }, function (ev) {
                 ev.preventDefault();
 
             });
-
-        // alertify.confirm('Deletar funcionário',
-        //     function () {
-        //         alertify.success('Ok');
-        //         employeeService.deleteEmployee(employee)
-        //             .then(function (data) {
-        //                 $scope.listEmployees();
-        //                 alertify.success("Funcionário deletado com sucesso");
-        //             })
-        //             .catch(function (data) {
-        //                 alertify.error("erro ao deletar funcionário");
-        //
-        //             })
-        //     },
-        //     function () {
-        //         alertify.error('Cancel');
-        //     })
-
 
     }
 

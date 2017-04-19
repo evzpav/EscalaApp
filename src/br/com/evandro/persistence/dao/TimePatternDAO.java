@@ -15,9 +15,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-/**
- * Created by Evandro on 02/03/2017.
- */
 public class TimePatternDAO {
 
     private DataSource dataSource;

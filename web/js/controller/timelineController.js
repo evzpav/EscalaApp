@@ -1,11 +1,9 @@
 angular.module("escala").controller("timelineController", function (loginService, $scope, $timeout, timelineService, storeService, $uibModal, alertify) {
 
     $scope.email = loginService.retrieveUser();
-    console.log("o email é :"+$scope.email);
-    
+
     $scope.subtitle = "GRÁFICOS";
     $scope.title = "Escala"
-
 
 
     $scope.timelineDTO = [];
@@ -15,9 +13,7 @@ angular.module("escala").controller("timelineController", function (loginService
                 if (data.listWeekPeriodOfWork.length) {
                     $scope.timelineDTO = data.listWeekPeriodOfWork;
                     $scope.heatMap($scope.timelineDTO);
-                    storeService.getStore(1).then(function (data) {
-                        $scope.store = data;
-                    });
+                    $scope.store = data.store;
 
                 } else {
                     alertify.closeLogOnClick(true)
@@ -214,13 +210,13 @@ angular.module("escala").controller("timelineController", function (loginService
         return '';
     }
 
-
-    $scope.$watch('datePicker', function (val) {
-        $scope.selectedDate = moment(val).format('DD/MM/YYYY');
-        $scope.listTimelineForSelectedDate($scope.selectedDate);
-    });
-
-
+    $scope.refreshTimeline = function () {
+        $scope.$watch('datePicker', function (val) {
+            $scope.selectedDate = moment(val).format('DD/MM/YYYY');
+            $scope.listTimelineForSelectedDate($scope.selectedDate);
+        });
+    }
+    $scope.refreshTimeline();
 })
 
 

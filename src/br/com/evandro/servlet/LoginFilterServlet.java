@@ -1,7 +1,9 @@
 package br.com.evandro.servlet;
 
 import br.com.evandro.controller.LoginController;
+import br.com.evandro.controller.StoreController;
 import br.com.evandro.exceptions.NotFoundException;
+import br.com.evandro.model.Store;
 import br.com.evandro.model.User;
 
 import javax.annotation.Resource;
@@ -12,11 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebFilter("/api/*")
 public class LoginFilterServlet implements Filter {
 
     private LoginController loginController;
+    private StoreController storeController;
 
     @Resource(name = "jdbc/escala")
     private DataSource dataSource;
@@ -27,6 +31,7 @@ public class LoginFilterServlet implements Filter {
         try {
 
             loginController = new LoginController(dataSource);
+            storeController = new StoreController(dataSource);
         } catch (Exception exc) {
             throw new ServletException(exc);
         }
@@ -45,14 +50,26 @@ public class LoginFilterServlet implements Filter {
         newUser.setEmail(email);
         newUser.setPassword(password);
 
+        String storeIdString = request.getHeader("store");
+        int storeId = Integer.parseInt(storeIdString);
+
+
         try {
             User user = loginController.doLogin(newUser);
             request.setAttribute("user", user);
+
+            Store store =  storeController.getStoreById(storeId);
+            request.setAttribute("store", store);
+
             chain.doFilter(req, res);
         } catch (NotFoundException e) {
             response.setStatus(500);
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+
 
     }
 

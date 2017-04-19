@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -59,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, NotFoundException {
+    private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, NotFoundException, SQLException {
         String jsonDoLogin = null;
 
             jsonDoLogin = HttpUtil.getBody(request);

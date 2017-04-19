@@ -1,11 +1,14 @@
 package br.com.evandro.model;
 
-public class User {
+import java.util.List;
 
+public class User {
+    private int userId;
     private String email;
     private String password;
     private Company company;
     private int accessId;
+    private List<Store> stores;
 
     public User() {
 
@@ -41,5 +44,21 @@ public class User {
 
     public void setAccessId(int accessId) {
         this.accessId = accessId;
+    }
+
+    public List<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

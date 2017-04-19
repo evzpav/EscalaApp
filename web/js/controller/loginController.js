@@ -6,10 +6,10 @@ angular.module("escala").controller("loginController", function ($scope, $localS
     $scope.buttonDescription = "Entrar";
 
 
-    $scope.doLogin = function (user) {
-        loginService.doLogin(user)
-            .then(function (data) {
-                loginService.saveUser(data);
+    $scope.doLogin = function (newUser) {
+        loginService.doLogin(newUser)
+            .then(function (user) {
+                loginService.saveUser(user);
                 alertify.success("Login sucesso!")
                 $state.go('timeline');
             })
