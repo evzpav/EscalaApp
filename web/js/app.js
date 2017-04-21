@@ -21,6 +21,7 @@ angular.module("escala",
                 $http.defaults.headers.common.Store = loginService.retrieveDefaultStore();
             } else {
                 $http.defaults.headers.common.Authorization = "";
+                $http.defaults.headers.common.Store = "";
             }
         })
 

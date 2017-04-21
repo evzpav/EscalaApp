@@ -1,9 +1,9 @@
-angular.module("escala").factory("loginService", function ($localStorage, $http, linkValues) {
+angular.module("escala").factory("loginService", function ($localStorage, $http, linkValues, $rootScope) {
 
     var saveUser = function (data) {
         $localStorage.currentUser = data;
         saveDefaultStoreUser(data);
-
+        $rootScope.$broadcast('updateNavbar');
     };
 
 
