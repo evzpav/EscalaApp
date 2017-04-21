@@ -1,7 +1,6 @@
 angular.module("escala").controller("employeeController", function ($scope, employeeService, $state, alertify) {
 
-    $scope.subtitle = "LISTA";
-    $scope.title = "Funcionários";
+    $scope.subtitle = "Lista de funcionários";
 
     $scope.store = '';
 
@@ -10,6 +9,7 @@ angular.module("escala").controller("employeeController", function ($scope, empl
             .then(function (data) {
                 $scope.employees = data.listOfEmployees;
                 $scope.store = data.store;
+                $scope.title = $scope.store.storeName ;
             })
     };
 

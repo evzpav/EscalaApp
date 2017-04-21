@@ -1,4 +1,4 @@
-<div class="dashhead">
+<div class="dashhead m-t-md" id="div-title">
     <div class="dashhead-titles">
         <h6 class="dashhead-subtitle">{{subtitle}}</h6>
         <h2 class="dashhead-title">{{title}}</h2>
@@ -8,22 +8,16 @@
 
 
 <hr class="m-t">
-<div class="row">
-    <div id="storeNameDiv" class="col-md-6">
-        <h6 class="dashhead-subtitle">Farmácia</h6>
-        <h2 id="storeLabel" ng-model="store">{{store.storeName}}</h2>
-    </div>
-</div>
 
 <div class="row">
     <div id="filterInputDiv" class="col-md-3">
-        <div class="btn-toolbar-item input-with-icon" style="margin-top: 29px;">
+        <div class="btn-toolbar-item input-with-icon">
             <input class="form-control" ng-model="searchText" id="filterInput" placeholder="Filtrar..."><span
                 class="icon icon-magnifying-glass"></span>
         </div>
     </div>
 
-    <div id="datePickerTimeline"class="pull-right col-md-3">
+    <div id="datePickerTimeline" class="pull-right col-md-3">
         <label>Semana do dia: </label>
         <p class="input-group">
             <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="datePicker"
@@ -98,9 +92,6 @@
                     <button id="buttonClockModal" class="btn btn-lg btn-primary-outline" ng-click="goToTimePattern(employee)"><span
                             class="icon icon-clock" aria-hidden="true"></span></button>
                 </div>
-                <div>
-                    <h4 class="modal-title">Editar horário isolado</h4>
-                </div>
 
             </div>
 
@@ -109,6 +100,10 @@
 
         <div class="modal-body" id="modal-body">
 
+
+            <div>
+                <h4 class="modal-title">Editar horário isolado</h4>
+            </div>
             <label>{{day | formatDateFilter}}</label>
             <div class="checkbox custom-control custom-checkbox">
                 <label>

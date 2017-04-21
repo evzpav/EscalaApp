@@ -1,4 +1,4 @@
-<div class="dashhead">
+<div class="dashhead m-t-md" id="div-title">
     <div class="dashhead-titles">
         <h6 class="dashhead-subtitle">{{subtitle}}</h6>
         <h2 class="dashhead-title">{{title}}</h2>
@@ -19,9 +19,6 @@
 </div>
 
 <div class="form-inline">
-    <div>
-        <h2>{{formTitle}}</h2>
-    </div>
     <div class="col-md-3 form-group">
         <label>Nome: <h3>{{employee.employeeName | nameFilter}}</h3></label>
     </div>
@@ -52,10 +49,7 @@
 
 </div>
 <div class="row">
-    <div class="col-md-3">
-        <!--<button ng-model="listOfWeekTimePattern" ng-hide="listOfWeekTimePattern" class="btn btn-pill btn-secondary">Adicionar horários</button>-->
-    </div>
-    <div id="repeatMondayButton" class="col-md-3">
+    <div id="repeatMondayButton">
         <button ng-click="repeatFirstLine()" id="buttonrepeat" class="btn btn-default-outline">Repetir horários da
             Segunda-Feira
         </button>
@@ -65,7 +59,7 @@
 
 
 <form name="timePatternForm">
-    <div class="table-responsive">
+    <div class="table-responsive" id="div-timepattern-table">
         <table class="table  table-bordered">
             <thead>
             <tr>
@@ -123,7 +117,7 @@
     </div>
 
 
-    <div class="pull-right">
+    <div class="pull-right" id="btns-timepattern">
 
         <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary btn-group" ng-disabled="timePatternForm.$invalid">
             <strong>Salvar</strong>

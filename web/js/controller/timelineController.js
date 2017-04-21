@@ -3,7 +3,7 @@ angular.module("escala").controller("timelineController", function (loginService
     $scope.email = loginService.retrieveUser();
 
     $scope.subtitle = "GRÁFICOS";
-    $scope.title = "Escala"
+    $scope.title = "";
 
 
     $scope.timelineDTO = [];
@@ -14,7 +14,7 @@ angular.module("escala").controller("timelineController", function (loginService
                     $scope.timelineDTO = data.listWeekPeriodOfWork;
                     $scope.heatMap($scope.timelineDTO);
                     $scope.store = data.store;
-
+                    $scope.title = $scope.store.storeName;
                 } else {
                     alertify.closeLogOnClick(true)
                         .log("Nenhum horário registrado para a semana do dia " + date);

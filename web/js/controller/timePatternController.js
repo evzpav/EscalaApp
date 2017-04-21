@@ -1,8 +1,7 @@
 angular.module("escala").controller("timePatternController", function ($scope, timePatternService, $state, $stateParams, alertify, emptyTimePattern) {
     $scope.subtitle = "CADASTROS";
-    $scope.title = "Horários";
+    $scope.title = "Padrão de Horários";
 
-    $scope.formTitle = "Cadastre o padrão de horários"
     $scope.timeRegex = '/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/';
 
 

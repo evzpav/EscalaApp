@@ -40,6 +40,8 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         $state.go($state.current.name, {}, {reload: true});
     }
 
+    $scope.user = loginService.retrieveUser().data;
+
 });
 
 
