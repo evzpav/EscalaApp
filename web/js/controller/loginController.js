@@ -24,5 +24,13 @@ angular.module("escala").controller("loginController", function ($scope, $localS
         $scope.loginForm.$setPristine();
     }
 
+    $scope.goToDemo = function () {
+        var demoUser = {
+            email: "demo@escalaapp.com",
+            password: "demo"
+        }
+        $scope.doLogin(demoUser);
+    }
+
 
 });

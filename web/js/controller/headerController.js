@@ -5,13 +5,11 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         $scope.stores = loginService.listUserStores();
     }
 
-    $scope.udpateNavbar = function () {
+    $scope.updateNavbar = function () {
         $scope.listStores();
-
         $scope.user = loginService.retrieveUser().data;
     }
 
-    $scope.udpateNavbar();
 
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path()
@@ -26,11 +24,8 @@ angular.module("escala").controller("headerController", function ($scope, $locat
             .okBtn("Sim")
             .cancelBtn("Não")
             .confirm("Deseja sair do sistema?", function (ev) {
-
                 loginService.doLogout();
-
                 $state.go('login');
-
                 ev.preventDefault();
 
             }, function (ev) {
@@ -45,9 +40,8 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         $state.go($state.current.name, {}, {reload: true});
     }
 
-
     $rootScope.$on('updateNavbar', function () {
-        $scope.udpateNavbar();
+        $scope.updateNavbar();
     });
 });
 

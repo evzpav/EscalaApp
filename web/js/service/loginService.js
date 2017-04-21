@@ -6,11 +6,9 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
         $rootScope.$broadcast('updateNavbar');
     };
 
-
     var retrieveUser = function () {
         return $localStorage.currentUser;
     };
-
 
     var saveDefaultStoreUser = function (data) {
         $localStorage.defaultStore = data.data.stores[0].storeId;
@@ -30,12 +28,10 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
     var doLogin = function (user) {
         return $http.post(linkValues.UrlDoLogin, user);
 
-
     }
 
     var listUserStores = function () {
-        var user = retrieveUser();
-        return user.data.stores;
+        return retrieveUser().data.stores;
     }
 
     return {
