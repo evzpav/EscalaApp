@@ -5,7 +5,7 @@ angular.module("escala").filter('formatDateFilter', function () {
                 .month(localDate.month -1)
                 .date(localDate.day)
                 .locale('pt-BR')
-                .format('DD/MM/YYYY dddd');
+                .format('DD/MM/YYYY - dddd');
 
 
     };

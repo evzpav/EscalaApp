@@ -43,7 +43,6 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
         saveDefaultStore: saveDefaultStore,
         retrieveDefaultStore: retrieveDefaultStore,
         listUserStores: listUserStores
-
     }
 
 

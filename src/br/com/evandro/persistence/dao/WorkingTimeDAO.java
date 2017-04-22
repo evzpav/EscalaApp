@@ -173,7 +173,8 @@ public class WorkingTimeDAO {
         try {
             myConn = dataSource.getConnection();
 
-            String sql = "update working_time set (start_time, end_time, interval_start, interval_end, working) = (?,?,?,?,?) where working_time_id = (?)";
+            String sql = "update working_time set (start_time, end_time, interval_start, " +
+                    "interval_end, working) = (?,?,?,?,?) where working_time_id = (?)";
 
             myStmt = myConn.prepareStatement(sql);
 
@@ -209,7 +210,8 @@ public class WorkingTimeDAO {
         try {
             myConn = dataSource.getConnection();
 
-            String sql = "insert into working_time (day, start_time, end_time, interval_start, interval_end, working, employee_id) values (?,?,?,?,?,?,?)";
+            String sql = "insert into working_time (day, start_time, end_time, interval_start, " +
+                    "interval_end, working, employee_id) values (?,?,?,?,?,?,?)";
 
             myStmt = myConn.prepareStatement(sql);
 

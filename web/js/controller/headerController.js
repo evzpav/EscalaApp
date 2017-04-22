@@ -1,6 +1,5 @@
 angular.module("escala").controller("headerController", function ($scope, $location, loginService, $state, alertify, $rootScope) {
 
-
     $scope.listStores = function () {
         $scope.stores = loginService.listUserStores();
     }
@@ -10,13 +9,16 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         $scope.user = loginService.retrieveUser().data;
     }
 
-
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path()
     };
 
     $scope.isLoggedIn = function () {
         return loginService.retrieveUser();
+    }
+
+    if($scope.isLoggedIn){
+        $scope.updateNavbar();
     }
 
     $scope.logout = function () {

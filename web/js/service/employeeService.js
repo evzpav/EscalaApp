@@ -37,8 +37,11 @@ angular.module("escala").factory("employeeService", function ($http, linkValues,
         getEmployeeToUpdate: getEmployeeToUpdate,
         deleteEmployee: deleteEmployee,
         addEmployee: addEmployee,
-        updateEmployee: updateEmployee
+        updateEmployee: updateEmployee,
+
     }
+
+
 
 
 });

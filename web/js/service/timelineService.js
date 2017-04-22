@@ -17,7 +17,7 @@ angular.module("escala").factory("timelineService", function ($http, linkValues,
             hours.push(i);
         }
         return hours;
-    };
+    }
 
     function isWorking(periodOfWork, hour) {
         function firstPeriodWorking(hour) {

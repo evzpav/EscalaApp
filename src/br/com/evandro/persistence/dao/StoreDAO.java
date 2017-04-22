@@ -55,7 +55,8 @@ public class StoreDAO {
             String sql = "select store.store_id, store_name, store_address from user_login " +
                     "join user_store on user_store.user_id = user_login.user_id " +
                     "join store on user_store.store_id = store.store_id " +
-                    "where user_login.user_id = ?";
+                    "where user_login.user_id = ?" +
+                    "order by store_name";
 
             myStmt = myConn.prepareStatement(sql);
 
