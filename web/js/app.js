@@ -18,7 +18,7 @@ angular.module("escala",
                 $state.go('login');
             } else if (user != null) {
                 $http.defaults.headers.common.Authorization = user.data.email + ":" + user.data.password;
-                $http.defaults.headers.common.Store = loginService.retrieveDefaultStore();
+                $http.defaults.headers.common.Store = loginService.retrieveDefaultStoreId();
             } else {
                 $http.defaults.headers.common.Authorization = "";
                 $http.defaults.headers.common.Store = "";

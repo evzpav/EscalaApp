@@ -2,7 +2,7 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
 
     var saveUser = function (data) {
         $localStorage.currentUser = data;
-        saveDefaultStoreUser(data);
+        saveDefaultStoreId(data.data.stores[0].storeId);
         $rootScope.$broadcast('updateNavbar');
     };
 
@@ -10,15 +10,12 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
         return $localStorage.currentUser;
     };
 
-    var saveDefaultStoreUser = function (data) {
-        $localStorage.defaultStore = data.data.stores[0].storeId;
-    }
-    var saveDefaultStore = function (storeId) {
-        $localStorage.defaultStore = storeId;
+    var saveDefaultStoreId = function (storeId) {
+        $localStorage.defaultStoreId = storeId;
     }
 
-    var retrieveDefaultStore = function () {
-        return $localStorage.defaultStore;
+    var retrieveDefaultStoreId = function () {
+        return $localStorage.defaultStoreId;
     };
 
     var doLogout = function () {
@@ -34,15 +31,26 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
         return retrieveUser().data.stores;
     }
 
+    var getUserStore = function (storeId) {
+        var stores = listUserStores();
+        for(var i=0; i<stores.length; i++){
+            if(storeId === retrieveUser().data.stores[i].storeId){
+                return retrieveUser().data.stores[i].storeName;
+            }
+
+        }
+
+    }
+
     return {
         saveUser: saveUser,
         retrieveUser: retrieveUser,
         doLogout: doLogout,
         doLogin: doLogin,
-        saveDefaultStoreUser: saveDefaultStoreUser,
-        saveDefaultStore: saveDefaultStore,
-        retrieveDefaultStore: retrieveDefaultStore,
-        listUserStores: listUserStores
+        saveDefaultStoreId: saveDefaultStoreId,
+        retrieveDefaultStoreId: retrieveDefaultStoreId,
+        listUserStores: listUserStores,
+        getUserStore: getUserStore
     }
 
 
