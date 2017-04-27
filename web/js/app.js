@@ -19,6 +19,7 @@ angular.module("escala",
             } else if (user != null) {
                 $http.defaults.headers.common.Authorization = user.data.email + ":" + user.data.password;
                 $http.defaults.headers.common.Store = loginService.retrieveDefaultStoreId();
+                $rootScope.$broadcast('updateNavbar');
             } else {
                 $http.defaults.headers.common.Authorization = "";
                 $http.defaults.headers.common.Store = "";

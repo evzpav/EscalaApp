@@ -12,7 +12,7 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
 
     var saveDefaultStoreId = function (storeId) {
         $localStorage.defaultStoreId = storeId;
-    }
+    };
 
     var retrieveDefaultStoreId = function () {
         return $localStorage.defaultStoreId;
@@ -25,13 +25,14 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
     var doLogin = function (user) {
         return $http.post(linkValues.UrlDoLogin, user);
 
-    }
+    };
 
     var listUserStores = function () {
-        return retrieveUser().data.stores;
-    }
+        return $localStorage.currentUser.data.stores;
+    };
 
-    var getUserStore = function (storeId) {
+    var getUserStore = function () {
+        var storeId = retrieveDefaultStoreId();
         var stores = listUserStores();
         for(var i=0; i<stores.length; i++){
             if(storeId === retrieveUser().data.stores[i].storeId){
@@ -40,7 +41,7 @@ angular.module("escala").factory("loginService", function ($localStorage, $http,
 
         }
 
-    }
+    };
 
     return {
         saveUser: saveUser,

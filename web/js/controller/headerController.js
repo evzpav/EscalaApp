@@ -1,13 +1,10 @@
-angular.module("escala").controller("headerController", function ($scope, $location, loginService, $state, alertify, $rootScope, storeService) {
+angular.module("escala").controller("headerController", function ($scope, $location, loginService, $state, alertify, $rootScope) {
 
     $scope.updateNavbar = function () {
         $scope.stores = loginService.listUserStores();
         $scope.user = loginService.retrieveUser().data;
-        $scope.getDefaultStore();
-    }
-    $scope.getDefaultStore = function () {
-        var selectedStoreId = loginService.retrieveDefaultStoreId();
-        $scope.defaultStoreName = loginService.getUserStore(selectedStoreId);
+        $scope.defaultStoreName = loginService.getUserStore();
+        $scope.accessId = loginService.retrieveUser().data.accessId;
     }
 
     $scope.isActive = function (viewLocation) {
@@ -18,7 +15,7 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         return loginService.retrieveUser();
     }
 
-    if($scope.isLoggedIn){
+    if ($scope.user) {
         $scope.updateNavbar();
     }
 
@@ -40,13 +37,14 @@ angular.module("escala").controller("headerController", function ($scope, $locat
 
     $scope.setStore = function (store) {
         loginService.saveDefaultStoreId(store.storeId);
-        $scope.getDefaultStore();
+        loginService.getUserStore();
         $state.go($state.current.name, {}, {reload: true});
     }
 
     $rootScope.$on('updateNavbar', function () {
         $scope.updateNavbar();
     });
+
 });
 
 

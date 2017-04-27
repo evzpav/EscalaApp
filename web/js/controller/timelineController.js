@@ -89,31 +89,32 @@ angular.module("escala").controller("timelineController", function (loginService
     }
 
     $scope.updatePeriodOfWork = function (json) {
+        var accessId = loginService.retrieveUser().data.accessId;
+        if(accessId != 4) { // TODO acesso 4 é de visitante apenas. Entao nao abre modal.
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'group-select-modal.html',
+                controller: "ModalGroupSelect",
+                backdrop: 'static',
+                size: 'md',
+                resolve: {
+                    periodOfWork: json.periodOfWork
+                }
+            });
 
 
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'group-select-modal.html',
-            controller: "ModalGroupSelect",
-            backdrop: 'static',
-            size: 'md',
-            resolve: {
-                periodOfWork: json.periodOfWork
-            }
-        });
+            modalInstance.result.then(function () {
+
+                $timeout(function () {
+                    $scope.listTimelineForSelectedDate($scope.selectedDate);
+                }, 300)
 
 
-        modalInstance.result.then(function () {
+            }, function () {
 
-            $timeout(function () {
-                $scope.listTimelineForSelectedDate($scope.selectedDate);
-            }, 300)
-
-
-        }, function () {
-
-        });
+            });
+        }
     }
 
     //datepicker
@@ -214,10 +215,12 @@ angular.module("escala").controller("timelineController", function (loginService
         $scope.$watch('datePicker', function (val) {
             $scope.selectedDate = moment(val).format('DD/MM/YYYY');
             $scope.listTimelineForSelectedDate($scope.selectedDate);
+            $scope.accessId = loginService.retrieveUser().data.accessId;
         });
     }
     $scope.refreshTimeline();
 })
+
 
 
 //MODAL

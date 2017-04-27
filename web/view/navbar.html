@@ -21,7 +21,7 @@
                     <a ui-sref="timeline">Gráficos</a>
                 </li>
 
-                <li ng-class="{'active': isActive('/employees')}">
+                <li ng-class="{'active': isActive('/employees')}" ng-if="accessId != 4">
                     <a ui-sref="employees">Funcionários</a>
                 </li>
 
