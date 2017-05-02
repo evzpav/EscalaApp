@@ -102,18 +102,13 @@
 }
 
 #filterInputDiv {
-    margin-left: 15px;
     margin-bottom: 30px;
+    padding-top: 26px;
 
 }
 
 #storeNameDiv {
     margin-left: 15px;
-}
-
-#datePickerTimeline {
-    float: right;
-    margin-right: 108px;
 }
 
 #storeLabel {
@@ -136,7 +131,8 @@
     height: 0px;
 
 }
-.table> tbody> tr > td {
+
+.table > tbody > tr > td {
     padding-bottom: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -183,7 +179,7 @@
 
 }
 
-.icon-info-with-circle{
+.icon-info-with-circle {
     color: #1CA8DD;
 
 }
@@ -218,7 +214,7 @@
     margin-right: 26px;
 }
 
-#div-title {
+#div-title, #div-title-login {
     margin-left: 15px;
 }
 
@@ -232,6 +228,12 @@
     margin-left: 15px;
 
 }
+
+#btnAddEmployee{
+    margin-right: 53px;
+    margin-top: 27px;
+}
+
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

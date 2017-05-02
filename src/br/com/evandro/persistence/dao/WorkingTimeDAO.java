@@ -37,13 +37,13 @@ public class WorkingTimeDAO {
         try {
             myConn = dataSource.getConnection();
 
-            String sql = "select extract(dow from day) as day_of_week, extract(hour from start_time) as startTime, extract(hour from end_time) as endTime, * from working_time " +
+            String sql = "select extract(dow from day) as day_of_week, extract(hour from start_time) as startTime, extract(hour from end_time) as endTime, extract(hour from interval_start) as intervalStart, * from working_time " +
                     " join employee on  employee.employee_id = working_time.employee_id " +
                     " join store on store.store_id = employee.store_id" +
                     " where extract(year from day) = ? " +
                     " and extract(week from day) = ?" +
                     " and store.store_id = ?" +
-                    " order by startTime, endTime";
+                    " order by startTime, intervalStart, endTime";
 
             myStmt = myConn.prepareStatement(sql);
 

@@ -16,6 +16,6 @@ angular.module("escala").value('linkValues', {
 
 
 function path () {
-    //return "http://"+window.location.host+"/escala/"; //para rodar no servidor
-     return "http://localhost:9191/escala/"; //para rodar local
+    return "http://"+window.location.host+"/escala/"; //para rodar no servidor
+   //  return "http://localhost:9191/escala/"; //para rodar local
 }

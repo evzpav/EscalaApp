@@ -15,8 +15,8 @@ angular.module("escala").controller("timePatternController", function ($scope, t
                     var copyOflistOfTimePattern = angular.copy(data.listOfWeekTimePattern);
                     if (copyOflistOfTimePattern.length === 0) {
 
-                        $scope.listOfWeekTimePattern = [];
-                        $scope.listOfWeekTimePattern = angular.copy(emptyTimePattern.listOfWeekTimePattern);
+                       // $scope.listOfWeekTimePattern = [];
+                        $scope.listOfWeekTimePattern = emptyTimePattern.listOfWeekTimePattern;
                         $scope.isNewTimePattern = true;
                         alertify.delay(5000).log("Nenhum horário cadastrado para " + data.employeeName);
 

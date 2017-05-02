@@ -15,7 +15,7 @@ angular.module("escala").controller("headerController", function ($scope, $locat
         return loginService.retrieveUser();
     }
 
-    if ($scope.user) {
+    if (loginService.retrieveUser()) {
         $scope.updateNavbar();
     }
 
