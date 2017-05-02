@@ -1,0 +1,260 @@
+.footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+
+}
+
+#footer-h {
+    margin-left: 17px;
+}
+
+.working {
+    background-color: #AEAEAE;
+}
+
+.heatMap0 {
+    background-color: #F8696B;
+}
+
+.heatMap1 {
+    background-color: #F98370;
+}
+
+.heatMap2 {
+    background-color: #FA9D75;
+}
+
+.heatMap3 {
+    background-color: #FCB77A;
+}
+
+.heatMap4 {
+    background-color: #FDD17F;
+}
+
+.heatMap5 {
+    background-color: #FFEB84;
+}
+
+.heatMap6 {
+    background-color: #E0E383;
+}
+
+.heatMap7 {
+    background-color: #C1DA81;
+}
+
+.heatMap8 {
+    background-color: #A2D07F;
+}
+
+.heatMap9 {
+    background-color: #83C77D;
+}
+
+.heatMap10 {
+    background-color: #63BE7B;
+}
+
+.clickWorkingDay:hover {
+    background-color: lightgrey;
+}
+
+.clickWorkingDay {
+    cursor: pointer;
+}
+
+/*.table > tbody > tr > td, .table > tfoot > tr > td {*/
+/*padding: 4px !important;*/
+/*margin-top: 20px;*/
+
+/*}*/
+
+.jumbotron {
+    width: 600px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F5F5F5;
+}
+
+.form-control {
+    width: 80%;
+    margin: 0 auto;
+
+}
+
+.alert {
+    padding: 2px;
+    width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#filterInput {
+    margin-left: 0px;
+}
+
+#filterInputDiv {
+    margin-bottom: 30px;
+    padding-top: 26px;
+
+}
+
+#storeNameDiv {
+    margin-left: 15px;
+}
+
+#storeLabel {
+    margin-top: 0;
+
+}
+
+.inputTP {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    align-content: center;
+
+}
+
+.tdTimePattern {
+    margin: 0px;
+    height: 0px;
+
+}
+
+.table > tbody > tr > td {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 7px;
+    line-height: 1.0;
+    vertical-align: middle;
+}
+
+/*.table-responsive tr {*/
+/*line-height: 50%;*/
+/*}*/
+
+.table-condensed > thead > tr > th, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
+    padding: 1px;
+}
+
+.dayTitle {
+    color: #1CA8DD;
+    font-weight: normal;
+
+}
+
+.heatMapText {
+    text-align: center;
+}
+
+.hourHeader {
+    text-align: -webkit-right;
+}
+
+#repeatMondayButton {
+    margin-top: 36px;
+    margin-right: 10px;
+
+}
+
+#btns-timepattern {
+    margin-right: 55px;
+}
+
+#buttonClockModal {
+    margin-bottom: 10px;
+    margin-left: 5px;
+
+}
+
+.icon-info-with-circle {
+    color: #1CA8DD;
+
+}
+
+.icon-bar {
+    color: #00b0ff !important;
+}
+
+.navbar-nav {
+    background-color: #F5F5F5;
+}
+
+#navbar-ul {
+    margin-left: 22px;
+}
+
+.float-right {
+    float: right;
+}
+
+#navbar-header-escala {
+    margin-left: 20px;
+}
+
+#email-header {
+}
+
+#btn-logout-header {
+}
+
+#btn-toggler {
+    margin-right: 26px;
+}
+
+#div-title, #div-title-login {
+    margin-left: 15px;
+}
+
+#div-employee-table {
+    margin-left: 15px;
+    margin-right: 70px;
+}
+
+#div-timepattern-table {
+    margin-right: 55px;
+    margin-left: 15px;
+
+}
+
+#btnAddEmployee{
+    margin-right: 53px;
+    margin-top: 27px;
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .ui-view-mobile {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width: 321px) {
+    .ui-view-mobile {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 320px) {
+    .ui-view-mobile {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}

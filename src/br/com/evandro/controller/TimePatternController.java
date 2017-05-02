@@ -1,15 +1,12 @@
 package br.com.evandro.controller;
 
-import br.com.evandro.dao.TimePatternDAO;
+import br.com.evandro.persistence.dao.TimePatternDAO;
 import br.com.evandro.model.WeekTimePattern;
 
 import javax.sql.DataSource;
 
 import java.util.List;
 
-/**
- * Created by Evandro on 02/03/2017.
- */
 public class TimePatternController {
 
     private TimePatternDAO timePatternDAO;

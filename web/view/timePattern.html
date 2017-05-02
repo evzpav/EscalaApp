@@ -1,0 +1,129 @@
+<div class="dashhead m-t-md" id="div-title">
+    <div class="dashhead-titles">
+        <h6 class="dashhead-subtitle">{{subtitle}}</h6>
+        <h2 class="dashhead-title">{{title}}</h2>
+
+    </div>
+
+</div>
+
+<hr class="m-t">
+<div class="row">
+    <div class="col-sm-6">
+        <h2 id="storeLabel"></h2>
+    </div>
+
+    <div class="col-sm-6">
+        <label></label>
+    </div>
+</div>
+
+<div class="form-inline">
+    <div class="col-md-3 form-group">
+        <label>Nome: <h3>{{employee.employeeName | nameFilter}}</h3></label>
+    </div>
+
+    <div class="col-md-3 form-group">
+
+        <label>Função:<h3>{{employee.workFunction | nameFilter}}</h3></label>
+
+    </div>
+
+
+    <div id="datePickerTimePattern" class="col-md-3">
+
+        <label><p>Horários a partir da semana do dia:</p></label>
+        <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="datePicker"
+                   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+                   close-text="Close"
+                   alt-input-formats="altInputFormats" ng-click="open2()"/>
+            <span class="input-group-btn">
+
+            <button type="button" class="btn btn-default" ng-click="open1()"><i
+                    class="icon icon-calendar"></i></button>
+          </span>
+        </p>
+
+    </div>
+
+</div>
+<div class="row">
+    <div id="repeatMondayButton">
+        <button ng-click="repeatFirstLine()" id="buttonrepeat" class="btn btn-default-outline">Repetir horários da
+            Segunda-Feira
+        </button>
+    </div>
+</div>
+
+
+
+<form name="timePatternForm">
+    <div class="table-responsive" id="div-timepattern-table">
+        <table class="table  table-bordered">
+            <thead>
+            <tr>
+                <th class="col-sm-2">Dia da semana</th>
+                <th class="col-sm-2">Início</th>
+                <th class="col-sm-2">Início Intervalo</th>
+                <th class="col-sm-2">Fim Intervalo</th>
+                <th class="col-sm-2">Fim</th>
+                <th class="col-sm-1">Trabalhando?</th>
+                <th class="col-sm-1">Repete a cada(semanas)   <i class="icon icon-info-with-circle" rel="tooltip"
+                                                                 title="Número de semanas que o padrão se repetirá. Para horário que se repete a cada 15 dias, use número 2."></i></th>
+
+            </tr>
+            </thead>
+            <form name="timePatternForm">
+                <tbody>
+
+                <tr ng-repeat="item in listOfWeekTimePattern">
+                    <td class="tdTimePattern">{{item.dayOfWeek | dayOfWeekFilter}}</td>
+                    <td class="tdTimePattern"><input ng-model="item.timePattern.startTime" type="text"
+                                                     class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"></td>
+                    <td class="tdTimePattern"><input ng-model="item.timePattern.intervalStart"
+                                                     type="text" class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
+                    <td class="tdTimePattern"><input ng-model="item.timePattern.intervalEnd"
+                                                     type="text" class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
+                    <td class="tdTimePattern"><input ng-model="item.timePattern.endTime" type="text"
+                                                     class="form-control inputTP" ng-required="true" ui-mask="Hh:Mm"  ui-mask-placeholder ui-mask-placeholder-char="_"/></td>
+                    <td class="tdTimePattern">
+                        <div class="checkbox custom-control custom-checkbox">
+                            <label> <input ng-model="item.timePattern.working" class="form-control inputTP"
+                                           type="checkbox"
+                                           checked>
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </div>
+                    </td>
+
+
+                    <td class="tdTimePattern">
+                        <select ng-model="item.timePattern.repeatFrequency" class="form-control inputTP"
+                                ng-options="week.name as week.name for week in selectWeeks">
+
+                        </select>
+
+                    </td>
+
+                </tr>
+
+
+                </tbody>
+            </form>
+        </table>
+
+        <div id="alert"></div>
+
+    </div>
+
+
+    <div class="pull-right" id="btns-timepattern">
+
+        <button ng-click="saveOrUpdateTimePattern()" type="button" class="btn btn-primary btn-group" ng-disabled="timePatternForm.$invalid">
+            <strong>Salvar</strong>
+        </button>
+
+        <button ng-click="cancel()" type="button" class="btn btn-default btn-group">Cancelar</button>
+    </div>
+</form>

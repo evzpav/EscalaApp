@@ -1,0 +1,72 @@
+<div class="dashhead m-t-md" id="div-title">
+    <div class="dashhead-titles">
+        <h6 class="dashhead-subtitle">{{subtitle}}</h6>
+        <h2 class="dashhead-title">{{title}}</h2>
+
+    </div>
+
+</div>
+
+<hr class="m-t">
+<div class="container">
+    <div class="row">
+        <div id="filterInputDiv" class="col-md-3 col-sm-4 col-xs-12">
+            <div class="btn-toolbar-item input-with-icon">
+                <input id="filterInput" class="form-control" ng-model="searchText" placeholder="Filtrar..."><span
+                    class="icon icon-magnifying-glass"></span>
+            </div>
+        </div>
+
+        <div id="btnAddEmployee" class="pull-right col-md-3 col-xs-5">
+            <button type="button" ng-click="goToAddEmployeeForm()" class="btn btn-primary"><span
+                    class="icon icon-add-user"></span> Adicionar Novo Funcionário
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="flextable table-actions" id="div-employee-table">
+    <div class="table-full">
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th class="header"><strong>Id</strong></th>
+                    <th class="header"><strong>Nome</strong></th>
+                    <th class="header"><strong>Função</strong></th>
+                    <th class="header"><strong>Horários</strong></th>
+                    <th class="header"><strong>Editar</strong></th>
+                    <th class="header"><strong>Excluir</strong></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="employee in employees | filter:searchText">
+                    <td class="col-md-1 col-xs-1">{{employee.employeeId}}</td>
+                    <td class="col-md-1 col-xs-1">{{employee.employeeName | nameFilter}}</td>
+                    <td class="col-md-1 col-xs-1">{{employee.workFunction | nameFilter}}</td>
+                    <td class="col-md-1 col-xs-1">
+                        <button ng-click="goToTimePattern(employee)" class="btn btn-sm btn-primary-outline"
+                                type="button"><span
+                                class="icon icon-clock" aria-hidden="true"></span></button>
+                    </td>
+                    <td class="col-md-1 col-xs-1">
+                        <button ng-click="getEmployeeToUpdate(employee)" class="btn btn-sm btn-primary-outline"
+                                type="button"><span
+                                class="icon icon-edit" aria-hidden="true"></span></button>
+                    </td>
+                    <td class="col-md-1 col-xs-1">
+                        <button ng-click="deleteEmployee(employee)" class="btn btn-sm btn-primary-outline"
+                                type="button"><span
+                                class="icon icon-erase" aria-hidden="true"></span></button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+

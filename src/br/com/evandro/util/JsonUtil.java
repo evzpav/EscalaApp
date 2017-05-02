@@ -10,7 +10,7 @@ import com.google.gson.GsonBuilder;
 
 public class JsonUtil {
 
-	public static void sendJsonToJSP(HttpServletResponse response, Object object) throws IOException {
+	public static void sendJsonToAngular(HttpServletResponse response, Object object) throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gsonToSend = gsonBuilder.setDateFormat(ConvertDate.dateTypeGson).create();
 		gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
@@ -21,16 +21,32 @@ public class JsonUtil {
 		response.getWriter().write(jsonToSend);
 		System.out.println("json sent to jsp: " + jsonToSend);
 	}
+
+	public static void sendErrorJsonToAngular(HttpServletResponse response, Object object) throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gsonToSend = gsonBuilder.setDateFormat(ConvertDate.dateTypeGson).create();
+		gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+		String jsonToSend = gsonToSend.toJson(object);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		HttpUtil.setStatusError(response);
+		response.getWriter().write(jsonToSend);
+		System.out.println("json sent to jsp: " + jsonToSend);
+	}
+
+	public static void sendNotFoundJsonToAngular(HttpServletResponse response, Object object) throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gsonToSend = gsonBuilder.setDateFormat(ConvertDate.dateTypeGson).create();
+		gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+		String jsonToSend = gsonToSend.toJson(object);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		HttpUtil.setStatusNotFound(response);
+		response.getWriter().write(jsonToSend);
+		System.out.println("json sent to jsp: " + jsonToSend);
+	}
 	
-//	public static void sendJsonToJSP(HttpServletResponse response, ValidationError validation) throws IOException {
-//		Gson gsonToSend = new GsonBuilder().setDateFormat(ConvertDate.dateTypeGson).create();
-//		String jsonToSend = gsonToSend.toJson(validation);
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		response.getWriter().write(jsonToSend);
-//		System.out.println("json sent to jsp: " + jsonToSend);
-//	}
-	
+
 	public static Gson createGson(String jsonReceived) {
 		return createGson(jsonReceived, ConvertDate.dateType);
 	}

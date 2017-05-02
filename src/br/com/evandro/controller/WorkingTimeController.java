@@ -5,16 +5,16 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.sql.DataSource;
 
-import br.com.evandro.dao.WorkingTimeDAO;
+import br.com.evandro.persistence.dao.WorkingTimeDAO;
 import br.com.evandro.model.NumberOfWeeks;
 import br.com.evandro.model.PeriodOfWork;
 import br.com.evandro.model.WeekPeriodOfWork;
 import br.com.evandro.model.WeekTimePattern;
+import br.com.evandro.util.ConvertDate;
 
 public class WorkingTimeController {
 
@@ -26,8 +26,8 @@ public class WorkingTimeController {
 
     }
 
-    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate) throws SQLException {
-        return workingTimeDAO.getWorkingTimeDateSelected(selectedDate);
+    public List<WeekPeriodOfWork> getWorkingTimeDateSelected(LocalDate selectedDate, int storeId) throws SQLException {
+        return workingTimeDAO.getWorkingTimeDateSelected(selectedDate, storeId);
 
     }
 
@@ -52,7 +52,7 @@ public class WorkingTimeController {
 
 
     public LocalDate setStartWeekDate(String startWeekDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(ConvertDate.dateType);
         formatter = formatter.withLocale(new Locale("pt", "BR"));
         LocalDate localDate = LocalDate.parse(startWeekDate, formatter);
         LocalDate mondayOfWeek = localDate.with(DayOfWeek.MONDAY);
@@ -107,22 +107,11 @@ public class WorkingTimeController {
     }
 
 
-    public void updateListOfPeriodOfWork(List<PeriodOfWork> bigListOfPeriodOfWork) {
-        for (PeriodOfWork p : bigListOfPeriodOfWork) {
-            try {
-                workingTimeDAO.updatePeriodOfWorkById(p);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
     public void deleteBigListOfPeriodOfWork(Integer employeeId) {
         workingTimeDAO.deleteBigListOfPeriodOfWork(employeeId);
     }
 
-    public void deleteBigListOfPeriodOfWorkFutureOnly(int employeeId, LocalDate referenceDate) {
-        workingTimeDAO.deleteBigListOfPeriodOfWorkFutureOnly(employeeId, referenceDate);
-    }
+//    public void deleteBigListOfPeriodOfWorkFutureOnly(int employeeId, LocalDate referenceDate) {
+//        workingTimeDAO.deleteBigListOfPeriodOfWorkFutureOnly(employeeId, referenceDate);
+//    }
 }

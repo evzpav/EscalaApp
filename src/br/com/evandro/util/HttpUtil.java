@@ -47,12 +47,6 @@ public class HttpUtil {
 		return body;
 	}
 	
-//	public static void sendJsonToJsp(HttpServletResponse response, ValidationError validation) throws IOException {
-//		String jsonRetorno = new Gson().toJson(validation);
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		response.getWriter().write(jsonRetorno);
-//	}
 
 	public static void setStatusSuccess(HttpServletResponse response) {
 		response.setStatus(200);
@@ -61,5 +55,9 @@ public class HttpUtil {
 	public static void setStatusError(HttpServletResponse response) {
 		response.setStatus(500);
 		
+	}
+	public static void setStatusNotFound(HttpServletResponse response) {
+		response.setStatus(404);
+
 	}
 }

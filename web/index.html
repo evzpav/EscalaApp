@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="escala">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Escala App</title>
+
+    <!--CSS-->
+
+    <!--<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet" media="all">-->
+    <link href="lib/roboto_fonts.css" rel="stylesheet" media="all">
+    <link href="theme-dashboard-extended/assets/css/toolkit-light.css" rel="stylesheet" media="all">
+    <link href="theme-dashboard-extended/assets/css/application.css" rel="stylesheet" media="all">
+    <link href="bower_components/alertifyjs/dist/css/alertify.css" rel="stylesheet" media="all">
+    <link href="css/app.css" rel="stylesheet" media="all">
+    <link href="css/responsive.css" rel="stylesheet" media="all">
+    <link rel="icon" href="theme-dashboard-extended/escala-icone.PNG">
+
+    <!--jquery-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="theme-dashboard-extended/dist/toolkit.min.js"></script>
+
+    <!--angular-->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
+    <script src="bower_components/alertifyjs/dist/js/ngAlertify.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+
+    <!--PDF GENERATION-->
+    <!--<script src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>-->
+    <!--<script src="bower_components/jsPDF/dist/jspdf.debug.js"></script>-->
+    <!--<script src="bower_components/angular-save-html-to-pdf/dist/saveHtmlToPdf.js"></script>-->
+
+    <!--<script src="bower_components/pdfmake/build/pdfmake.js"></script>-->
+    <!--<script src="bower_components/pdfmake/build/vfs_fonts.js"></script>-->
+    <script src="bower_components/jspdf/dist/jspdf.debug.js"></script>
+
+    <!--angular-implementation-->
+    <script src="js/app.js"></script>
+    <script src="js/value/configValue.js"></script>
+    <script src="js/service/timelineService.js"></script>
+    <script src="js/controller/timelineController.js"></script>
+    <script src="js/service/employeeService.js"></script>
+    <script src="js/controller/employeeController.js"></script>
+    <script src="js/controller/addEmployeeController.js"></script>
+    <script src="js/service/timePatternService.js"></script>
+    <script src="js/controller/timePatternController.js"></script>
+    <script src="js/controller/headerController.js"></script>
+    <script src="js/controller/loginController.js"></script>
+    <script src="js/service/loginService.js"></script>
+    <script src="js/service/storeService.js"></script>
+    <script src="js/config/uiRouterConfig.js"></script>
+    <script src="js/filter/change25Filter.js"></script>
+    <script src="js/filter/formatDateFilter.js"></script>
+    <script src="js/filter/dayOfWeekFilter.js"></script>
+    <script src="js/filter/nameFilter.js"></script>
+    <script src="js/value/emptyTimePattern.js"></script>
+    <script src="js/value/timePatternMask.js"></script>
+
+</head>
+
+<body class="with-top-navbar" id="printSectionId">
+
+<div class="container">
+    <div class="row">
+        <div ng-include="'view/navbar.html'"></div>
+
+        <div class="col-md-12 col-sm-12 ui-view-mobile content">
+
+            <ui-view></ui-view>
+        </div>
+
+        <div ng-include="'view/footer.html'"></div>
+    </div>
+</div>
+
+</body>
+</html>

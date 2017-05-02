@@ -1,14 +1,8 @@
 package br.com.evandro.servlet;
 
-import br.com.evandro.DTO.*;
-import br.com.evandro.controller.EmployeeController;
+import br.com.evandro.persistence.DTO.*;
 import br.com.evandro.controller.StoreController;
-import br.com.evandro.controller.TimePatternController;
-import br.com.evandro.controller.WorkingTimeController;
-import br.com.evandro.exceptions.BusinessException;
-import br.com.evandro.model.Employee;
 import br.com.evandro.model.Store;
-import br.com.evandro.model.WeekTimePattern;
 import br.com.evandro.util.HttpUtil;
 import br.com.evandro.util.JsonUtil;
 import com.google.gson.Gson;
@@ -23,10 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet("/StoreServlet")
+@WebServlet("/api/StoreServlet")
 public class StoreServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -48,10 +41,6 @@ public class StoreServlet extends HttpServlet {
     }
 
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String theCommand = request.getParameter("command");
@@ -81,11 +70,10 @@ public class StoreServlet extends HttpServlet {
     }
 
     private void listStores(HttpServletResponse response)  throws IOException, SQLException, ServletException {
-        List<Store> listOfStores = storeController.listStores(1);
-
+        int companyId = 1; // TODO chumbado aqui;
+        List<Store> listOfStores = storeController.listStores(companyId);
         ListOfStoresDTO listOfstoresDTO = new ListOfStoresDTO(listOfStores);
-
-        JsonUtil.sendJsonToJSP(response, listOfstoresDTO);
+        JsonUtil.sendJsonToAngular(response, listOfstoresDTO);
 
     }
 
@@ -104,7 +92,7 @@ public class StoreServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        JsonUtil.sendJsonToJSP(response, store);
+        JsonUtil.sendJsonToAngular(response, store);
     }
 
 

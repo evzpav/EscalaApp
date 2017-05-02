@@ -1,0 +1,53 @@
+<nav class="navbar navbar-nav navbar-fixed-top">
+    <div class="container-fluid container-fluid-spacious">
+        <div class="navbar-header" id="navbar-header-escala">
+            <button type="button" id="btn-toggler" class="nav-toggler nav-toggler-sm sidebar-toggler" data-toggle="collapse"
+                    data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand navbar-brand-emphasized" ui-sref="timeline">
+                <span class="icon icon-text navbar-brand-iconr"></span>
+                EscalaApp
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="headerController">
+
+            <ul class="nav navbar-nav" id="navbar-ul" ng-if="isLoggedIn()">
+                <li ng-class="{'active': isActive('/timeline')}">
+                    <a ui-sref="timeline">Gráficos</a>
+                </li>
+
+                <li ng-class="{'active': isActive('/employees')}" ng-if="accessId != 4">
+                    <a ui-sref="employees">Funcionários</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Loja: {{defaultStoreName}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="store in stores"><a href="#" ng-click="setStore(store)">{{store.storeName}}</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li id="email-header">
+                    <a href="">{{user.email}}</a>
+                </li>
+
+
+                <li id="btn-logout-header">
+                    <a href="" ng-click="logout()">Sair</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div></div>

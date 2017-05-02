@@ -1,0 +1,78 @@
+@media (min-width: 1200px) {
+    #navbar-header-escala {
+        margin-left: 148px;
+    }
+
+    #datePickerTimeline {
+        float: right;
+        margin-right: 108px;
+    }
+
+}
+
+/* Medium Devices (Landscape Tablets & Medium Desktops) */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    #timelineTableDiv {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+/* Small Devices (Portrait Tablets & Small Desktops) */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        width: 100%;
+    }
+
+    .nav-toggler-sm {
+        display: block;
+    }
+
+}
+
+/* Extra Small Devices (Landscape Phones & Portrait Tablets) */
+
+@media (max-width: 767px) {
+    .col-xs-12, .col-sm-12, .col-md-12 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #btnAddEmployee {
+        margin-top: 27px;
+    }
+
+}
+
+/* Extra Small Devices (Portrait Phones & Smaller devices) */
+
+@media (max-width: 480px) {
+    .jumbotron {
+        width: 100%;
+    }
+
+    .col-xs-12, .col-sm-12, .col-md-12 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .tdEmployeeNameTimeline{
+
+    }
+    .table-responsive > .table > tbody > tr > td{
+        column-width: 70px;
+
+    }
+
+}
+
+/* Extra Small Devices (Portrait Phones & Smaller devices) */
+
+@media (max-width: 320px) {
+    .col-xs-12, .col-sm-12, .col-md-12 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
